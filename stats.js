@@ -56,8 +56,8 @@ angular.module('splatoonApp').stats = function ($scope) {
     new Stat("Run Speed", "%", 0, 150, 60, function (x) {
         this.value = Math.min(this.max, (96 * (1 + x))/96*100);
     }),
-    new Stat("Swim Speed", "%", 0, 125, 120, function (x) {
-        this.value = Math.min(this.max, (192 * (1 + x))/192*100);
+    new Stat("Swim Speed", "%", 100, 125, 120, function (x) {
+        this.value = Math.min(this.max, (192 * (1 + x))/192*this.min);
     }),
     new Stat("Special Charge", "%", 0, 130, 100, function (x) {
         this.value = Math.min(this.max, 100 + 100*x);
@@ -65,8 +65,8 @@ angular.module('splatoonApp').stats = function ($scope) {
     new Stat("Special Time", "%", 0, 140, 75, function (x) {
         this.value = Math.min(this.max, 100 + 100*x);
     }),
-    new Stat("Special Save", "%", 0, 50, 60, function (x) {
-        this.value = Math.min(this.max, 0 + 100*x);
+    new Stat("Special Save", "%", 0, 100, 60, function (x) {
+        this.value = Math.min(this.max, this.min + 100*x);
     }),
     new Stat("Respawn Rate", "s", 2, (360 + 30 + 120)/60, 45, function (x) {
         this.value = Math.max(this.min, ((1.0 - x) * 360 + 30 + 120)/60);
