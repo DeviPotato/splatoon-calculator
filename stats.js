@@ -41,13 +41,13 @@ angular.module('splatoonApp').stats = function ($scope) {
     new Stat("Defense", "%", 83.3, 100, 100, function (x) {
         this.value = Math.max(this.min, 100 - 100*(x/1.8));
     }),
-    new Stat("Ink Recovery", "s", 1.8, 3, 75, function (x) {
+    new Stat("Ink Recovery", "s", 1.65, 3, 200/3, function (x) {
         this.value = Math.max(this.min, 3 * (1.0 - x));
     }),
-    new Stat("Ink Usage Main", "%", 60, 100, 75, function (x) {
+    new Stat("Ink Usage Main", "%", 55, 100, (200/3), function (x) {
         this.value = Math.max(this.min, 100 - 100*x);
     }),
-    new Stat("Ink Usage Sub", "%", 75, 100, 120, function (x) {
+    new Stat("Ink Usage Sub", "%", 65, 100, 600/7, function (x) {
         this.value = Math.max(this.min, 100 - 100*x);
     }),
     new Stat("Bomb Throw Range", "%", 0, 150, 60, function (x) {
@@ -65,8 +65,8 @@ angular.module('splatoonApp').stats = function ($scope) {
     new Stat("Special Time", "%", 0, 140, 75, function (x) {
         this.value = Math.min(this.max, 100 + 100*x);
     }),
-    new Stat("Special Save", "%", 0, 100, 60, function (x) {
-        this.value = Math.min(this.max, 50 + 100*x);
+    new Stat("Special Save", "%", 0, 50, 60, function (x) {
+        this.value = Math.min(this.max, 0 + 100*x);
     }),
     new Stat("Respawn Rate", "s", 2, (360 + 30 + 120)/60, 45, function (x) {
         this.value = Math.max(this.min, ((1.0 - x) * 360 + 30 + 120)/60);
