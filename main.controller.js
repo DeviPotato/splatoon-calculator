@@ -9,6 +9,7 @@ splatoonApp.controller('MainCtrl', function ($scope) {
 	angular.module('splatoonApp').stats($scope);
 	angular.module('splatoonApp').abilities($scope);
 	angular.module('splatoonApp').gear($scope);
+	angular.module('splatoonApp').weapons($scope);
 
 	//Start main logic
 	var points = 0;
@@ -16,10 +17,40 @@ splatoonApp.controller('MainCtrl', function ($scope) {
 	$scope.subs = [];
 	$scope.showModal = false;
 	$scope.ErrorMessage= 'Testing';
+	
+	$scope.selectedWeapon = $scope.weapons[0];
+	
   $scope.toggleModal = function(){
         $scope.showModal = !$scope.showModal;
   };
-
+    $scope.equipweapon = function(weapon){
+		var swimspeed = 100;
+		var saverbase = 40;
+		swimspeed=weapon.swimspeed;
+		if(weapon.depletion=="Light") {
+			saverbase = 60;
+		}
+		else if(weapon.depletion=="Heavy") {
+			saverbase = 25;
+		}
+		else {
+			saverbase = 40;
+		}
+		for(var i=0; i < $scope.stats.length; i++){
+			var name = $scope.stats[i].name;
+			if(name=="Swim Speed") {
+				$scope.stats[i].min=swimspeed;
+				calc();
+			}
+			if(name=="Special Save") {
+				$scope.stats[i].min=saverbase;
+				calc();
+			}
+		}
+			
+	}
+  
+	$scope.equipweapon($scope.selectedWeapon);
 	$scope.activate = function(ability){
 
 		/*

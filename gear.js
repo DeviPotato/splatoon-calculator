@@ -69,6 +69,8 @@ angular.module('splatoonApp').gear = function ($scope) {
 {"Show":true,"type":"Headgear","name":"Special Forces Beret","ability":"Opening Gambit","Ink Saver (Sub)":"1/33","Special Duration Up":"1/3.3"},
 {"Show":true,"type":"Headgear","name":"Squid Nordic","ability":"Comeback","Special Saver":"1/33","Quick Respawn":"1/3.3"},
 {"Show":true,"type":"Headgear","name":"Treasure Hunter","ability":"Ink Recovery Up","Ink Saver (Sub)":"1/33","Special Duration Up":"1/3.3"},
+{"Show":true,"type":"Headgear","name":"CoroCoro Cap","ability":"Damage Up","Special Charge Up":"1/33","Special Saver":"1/3.3"},
+{"Show":true,"type":"Clothes","name":"CoroCoro Hoodie","ability":"Cold-Blooded","Special Charge Up":"1/33","Special Saver":"1/3.3"},
 {"Show":true,"type":"Clothes","name":"Linen Shirt","ability":"Bomb Range Up","Ink Saver (Main)":"1/3.3","Run Speed Up":"1/33"},
 {"Show":true,"type":"Clothes","name":"Squidmark Sweat","ability":"Bomb Range Up","Damage Up":"1/3.3","Ink Saver (Main)":"1/33"},
 {"Show":true,"type":"Clothes","name":"Firefin Navy Sweat","ability":"Bomb Range Up","Ink Recovery Up":"1/33","Ink Saver (Sub)":"1/3.3"},
