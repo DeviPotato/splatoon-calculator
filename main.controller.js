@@ -15,6 +15,7 @@ splatoonApp.controller('MainCtrl', function ($scope) {
 	var points = 0;
 	$scope.mains = [];
 	$scope.subs = [];
+	$scope.effectiveDamage = {};
 	$scope.showModal = false;
 	$scope.ErrorMessage= 'Testing';
 	
@@ -47,7 +48,6 @@ splatoonApp.controller('MainCtrl', function ($scope) {
 				calc();
 			}
 		}
-			
 	}
   
 	$scope.equipweapon($scope.selectedWeapon);
@@ -152,6 +152,17 @@ splatoonApp.controller('MainCtrl', function ($scope) {
 				$scope.mains.count(name),
 				$scope.subs.count(name)
 			);
+		}
+		$scope.effectiveDamage = {};
+		for(var k in $scope.selectedWeapon.damageValues) $scope.effectiveDamage[k]=$scope.selectedWeapon.damageValues[k];
+		for(var key in $scope.effectiveDamage) {
+			var value = $scope.effectiveDamage[key];
+			value = ((value*$scope.stats[0].value)/100).toFixed(1)
+			// splatoon caps damage values at specific thresholds
+			if(value>33.3 && $scope.selectedWeapon.damageValues[key]<33.3) value = 33.3;
+			if(value>49.9 && $scope.selectedWeapon.damageValues[key]<49.9) value = 49.9;
+			if(value>99.9 && $scope.selectedWeapon.damageValues[key]<99.9) value = 99.9;
+			$scope.effectiveDamage[key]=value;
 		}
 	}
 

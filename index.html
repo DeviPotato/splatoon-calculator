@@ -43,9 +43,11 @@
 
 <div class="col-md-6">
   <h2 class="page-header">Choose Your Weapon</h2>
-  <select ng-model="selectedWeapon" ng-options="x.name for x in weapons" ng-click="equipweapon(selectedWeapon)"></select>
-  
-  <h2 class="page-header">Choose Your abilities</h2>
+  <select ng-model="selectedWeapon" ng-options="x.name for x in weapons" ng-change="equipweapon(selectedWeapon)"></select>
+  <div class="weapon">
+  <span ng-repeat="(key, value) in effectiveDamage"><br><b>{{key}}</b>: {{value}}</span>
+  </div>
+  <h2 class="page-header">Choose Your Abilities</h2>
       <ul class="col-xs-3" ng-repeat="ability in abilities">
         <a href="javascript:"><img ng-src="{{ability.icon}}" alt="{{ability.name}}" ng-click="activate(ability)"></a>
       </ul>
