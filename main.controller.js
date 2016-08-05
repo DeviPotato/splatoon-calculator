@@ -151,9 +151,9 @@ splatoonApp.controller('MainCtrl', function ($scope) {
 			
 		// apply swim penalty
 		//FIXME: bad practice
-		if($scope.selectedWeapon.speedPenalty && $scope.mains.indexOf($scope.abilities[14]) != -1) {
+		if($scope.selectedWeapon.speedPenalty && $scope.mains.indexOf($scope.abilities[5]) != -1) {
 			$scope.stats[7].min=75;
-		} else if($scope.selectedWeapon.speedPenalty || $scope.mains.indexOf($scope.abilities[14]) != -1) {
+		} else if($scope.selectedWeapon.speedPenalty || $scope.mains.indexOf($scope.abilities[5]) != -1) {
 			$scope.stats[7].min=90;
 		} else $scope.stats[7].min=100;
 		

@@ -1,6 +1,85 @@
 angular.module('splatoonApp').abilities = function ($scope) {
 
 	$scope.abilities =[{
+		name : 'Comeback',
+		info : 'Comeback',
+		icon : 'assets/images/Ability_Comeback.png',
+		stackable: false,
+		affects: 'nothing',
+		effects: 'Boosts Stats on Respawn'
+	}, {
+		name : 'Tenacity',
+		info : 'Fills the special gauge automatically if your team has fewer active players than the enemy',
+		icon : 'assets/images/Ability_Tenacity.png',
+		stackable: false,
+		affects: 'nothing',
+		effects: 'Fills the special gauge automatically if your team has fewer active players than the enemy'
+	}, {
+		name : 'Opening Gambit',
+		info : 'Opening Gambit',
+		icon : 'assets/images/Ability_Opening_Gambit.png',
+		stackable: false,
+		affects: 'nothing',
+		effects: 'Boosts  your speed/both Inkling and squid form for the first 30 seconds of battle',
+	}, {
+		name : 'Last-Ditch Effort',
+		info : 'The Last-Ditch Effort ability boosts ink recovery rate and weapon ink efficiency for the last 30 seconds of battle.',
+		icon : 'assets/images/Ability_Last-Ditch_Effort.png',
+		stackable: false,
+		affects: 'nothing',
+		effects: 'Boosts ink recovery rate and weapon ink efficiency for the last 30 seconds of battle',
+	}, {
+		name : 'Recon',
+		info : 'Reveals enemy locations on spawn',
+		icon : 'assets/images/Ability_Recon.png',
+		stackable: false,
+		affects: 'nothing',
+		effects: 'Reveals enemy locations on spawn'
+	}, {
+		name : 'Ninja Squid',
+		info : 'Hides ink movement from enemy team',
+		icon : 'assets/images/Ability_Ninja_Squid.png',
+		stackable: false,
+		effects: 'Hides ink movement from enemy team',
+		affects: 'nothing',
+	//	negative: true,
+	}, {
+		name : 'Haunt',
+		info : 'Haunt',
+		icon : 'assets/images/Ability_Haunt.png',
+		stackable: false,
+		affects: 'nothing',
+		effects: 'Shows location of enemy who splatted you for 12 secs',
+	}, {
+		name : 'Cold-Blooded',
+		info : 'Cold-Blooded',
+		icon : 'assets/images/Ability_Cold_Blooded.png',
+		stackable: false,
+		affects: 'Echolocator/Haunt Duration',
+		effects: 'Shortens the effect of attacks that let enemies determine your position, such as Point Sensors.'
+	}, {
+		name : 'Bomb Sniffer',
+		info : 'Shows location of mines and grenades',
+		icon : 'assets/images/Ability_Bomb_Sniffer.png',
+		stackable: false,
+		affects: 'nothing',
+		effects: 'Shows location of mines and grenades'
+	}, {
+		name : 'Ink Resistance Up',
+		info : 'Ink Resistance Up',
+		icon : 'assets/images/Ability_Ink_Resistance_Up.png',
+		stackable: false,
+		affects: 'nothing',
+		effects: 'Increases movement speed on enemy ink',
+	}, {
+		name : 'Stealth Jump',
+		info : 'Stealth Jump',
+		icon : 'assets/images/Ability_Stealth_Jump.png',
+		stackable: false,
+		effects: 'Hides jump location from enemy team',
+		affects: 'Jump Speed',
+		negative: true //FIXME "negative" does not simply negate a main. Check the wiki.
+	},  {
 		name : 'Special Charge Up',
 		info : 'Special Charge Up',
 		icon : 'assets/images/Ability_Special_Charge_Up.png',
@@ -19,34 +98,6 @@ angular.module('splatoonApp').abilities = function ($scope) {
 		stackable: true,
 		affects: 'Ink Usage Sub'
 	}, {
-		name : 'Recon',
-		info : 'Reveals enemy locations on spawn',
-		icon : 'assets/images/Ability_Recon.png',
-		stackable: false,
-		affects: 'nothing',
-		effects: 'Reveals enemy locations on spawn'
-	}, {
-		name : 'Bomb Sniffer',
-		info : 'Shows location of mines and grenades',
-		icon : 'assets/images/Ability_Bomb_Sniffer.png',
-		stackable: false,
-		affects: 'nothing',
-		effects: 'Shows location of mines and grenades'
-	}, {
-		name : 'Cold-Blooded',
-		info : 'Cold-Blooded',
-		icon : 'assets/images/Ability_Cold_Blooded.png',
-		stackable: false,
-		affects: 'Echolocator/Haunt Duration',
-		effects: 'Shortens the effect of attacks that let enemies determine your position, such as Point Sensors.'
-	}, {
-		name : 'Comeback',
-		info : 'Comeback',
-		icon : 'assets/images/Ability_Comeback.png',
-		stackable: false,
-		affects: 'nothing',
-		effects: 'Boosts Stats on Respawn'
-	}, {
 		name : 'Damage Up',
 		info : 'Damage Up',
 		icon : 'assets/images/Ability_Damage_Up.png',
@@ -59,13 +110,6 @@ angular.module('splatoonApp').abilities = function ($scope) {
 		stackable: true,
 		affects: 'Defense'
 	}, {
-		name : 'Haunt',
-		info : 'Haunt',
-		icon : 'assets/images/Ability_Haunt.png',
-		stackable: false,
-		affects: 'nothing',
-		effects: 'Shows location of enemy who splatted you for 12 secs',
-	}, {
 		name : 'Bomb Range Up',
 		info : 'Bomb Range Up',
 		icon : 'assets/images/Ability_Bomb_Range_Up.png',
@@ -77,35 +121,6 @@ angular.module('splatoonApp').abilities = function ($scope) {
 		icon : 'assets/images/Ability_Ink_Recovery_Up.png',
 		stackable: true,
 		affects: 'Ink Recovery'
-	}, {
-		name : 'Ink Resistance Up',
-		info : 'Ink Resistance Up',
-		icon : 'assets/images/Ability_Ink_Resistance_Up.png',
-		stackable: false,
-		affects: 'nothing',
-		effects: 'Increases movement speed on enemy ink',
-	}, {
-		name : 'Last-Ditch Effort',
-		info : 'The Last-Ditch Effort ability boosts ink recovery rate and weapon ink efficiency for the last 30 seconds of battle.',
-		icon : 'assets/images/Ability_Last-Ditch_Effort.png',
-		stackable: false,
-		affects: 'nothing',
-		effects: 'Boosts ink recovery rate and weapon ink efficiency for the last 30 seconds of battle',
-	}, {
-		name : 'Ninja Squid',
-		info : 'Hides ink movement from enemy team',
-		icon : 'assets/images/Ability_Ninja_Squid.png',
-		stackable: false,
-		effects: 'Hides ink movement from enemy team',
-		affects: 'nothing',
-	//	negative: true,
-	}, {
-		name : 'Opening Gambit',
-		info : 'Opening Gambit',
-		icon : 'assets/images/Ability_Opening_Gambit.png',
-		stackable: false,
-		affects: 'nothing',
-		effects: 'Boosts  your speed/both Inkling and squid form for the first 30 seconds of battle',
 	}, {
 		name : 'Quick Respawn',
 		info : 'Quick Respawn',
@@ -137,25 +152,10 @@ angular.module('splatoonApp').abilities = function ($scope) {
 		stackable: true,
 		affects: 'Special Save'
 	}, {
-		name : 'Stealth Jump',
-		info : 'Stealth Jump',
-		icon : 'assets/images/Ability_Stealth_Jump.png',
-		stackable: false,
-		effects: 'Hides jump location from enemy team',
-		affects: 'Jump Speed',
-		negative: true //FIXME "negative" does not simply negate a main. Check the wiki.
-	}, {
 		name : 'Swim Speed Up',
 		info : 'Swim Speed Up',
 		icon : 'assets/images/Ability_Swim_Speed_Up.png',
 		stackable: true,
 		affects: 'Swim Speed'
-	}, {
-		name : 'Tenacity',
-		info : 'Fills the special gauge automatically if your team has fewer active players than the enemy',
-		icon : 'assets/images/Ability_Tenacity.png',
-		stackable: false,
-		affects: 'nothing',
-		effects: 'Fills the special gauge automatically if your team has fewer active players than the enemy'
 	}];
 };

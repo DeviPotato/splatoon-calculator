@@ -44,7 +44,7 @@
 
 
 <div class="col-md-6">
-  <h2 class="page-header">Choose Your Weapon</h2>
+  <h2 class="page-header">Weapon</h2>
   <div class="row">
   <div class="col-md-6"><select class="form-control btn btn-primary dropdown-toggle" data-ng-model="selectedWeapon" data-ng-options="x.name for x in weapons" data-ng-change="equipweapon(selectedWeapon)"></select></div>
   <!--<div class="col-md-6"><select class="form-control btn btn-primary dropdown-toggle"><option>Placeholder</option></select></div> -->
@@ -59,25 +59,38 @@
   <span  style="margin-left:10px; font-size: 9pt"><b>Duration:</b> {{effectiveSpecialDuration.toFixed(2)}}s</div>
   </div>
   </div>
-  <h2 class="page-header">Choose Your Abilities</h2>
+  <h2 class="page-header">Abilities 
+      <button type="button" class="btn btn-default btn-lg" ng-click="clear()">RESET</button></h2>
+     <div class="row">
+	 <div class="abilitylist">
+     <div class="col-md-6 col-xs-12">
+      <h2 >Mains:</h2>
+      <a href="javascript:">
+      <img class="icon" ng-repeat="main in mains track by $index" ng-src="{{main.icon}}" ng-class="imgtble" title="{{main.name}}"
+      ng-click="demain(main)" />
+      </a>
+      <!-- <h3>Abilities:</h3> -->
+	  <br>
+     <!-- <img class="icon" ng-repeat="main in mains track by $index" ng-src="{{main.icon}}" ng-class="imgtble" title="{{main.name}}" ng-hide="{{main.stackable}}"/> -->
+     <span ng-repeat="main in mains track by $index" ng-hide="{{main.stackable}}">{{main.name}} <span class="help" title="{{main.effects}}">?</span><br></span>
+     <p></p> 
+	  </div>
+	  <div class="col-md-6 col-xs-12">
+      <h2 >Subs:</h2>
+      <a href="javascript:">
+      <img class="icon small" ng-repeat="sub in subs track by $index" ng-src="{{sub.icon}}" ng-class="imgtble" title="{{sub.name}}" ng-click="desub(sub)"/>
+      </a>
+	  </div>
+	  </div>
+	  </div>
+	  <div class="row">
+	 <hr>
       <ul class="col-xs-3" ng-repeat="ability in abilities">
         <a href="javascript:"><img class="icon" ng-src="{{ability.icon}}" title="{{ability.name}}" ng-click="activate(ability)" ng-class="{'inactive' : points >= 57}"></a>
       </ul>
       </a>
-      <button type="button" class="btn btn-default btn-lg" ng-click="clear()">RESET</button>
-      <h1 >Mains:</h1>
-      <a href="javascript:">
-      <img class="icon"  ng-repeat="main in mains track by $index" ng-src="{{main.icon}}" ng-class="imgtble" title="{{main.name}}"
-      ng-click="demain(main)" />
-      </a>
-      <h2 >Subs:</h2>
-      <a href="javascript:">
-      <img class="icon" ng-repeat="sub in subs track by $index" ng-style="{padding:10}" ng-src="{{sub.icon}}" ng-class="imgtble" title="{{sub.name}}" ng-click="desub(sub)"/>
-      </a>
-     <h2>Abilities:</h2>
-     <img class="icon" ng-repeat="main in mains track by $index" ng-src="{{main.icon}}" ng-class="imgtble" title="{{main.name}}" ng-hide="{{main.stackable}}"/>
-     <p></p>
-     <h5 ng-repeat="main in mains track by $index" ng-hide="{{main.stackable}}">{{main.name}}:  {{main.effects}}</h5>
+	  </div>
+
 </div>
 
 
