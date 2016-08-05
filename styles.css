@@ -37,7 +37,7 @@
     margin-top: 70px;
     border-top: 1px solid #E5E5E5;
 }
-img {
+img.icon {
    width:70px;
    padding:5px;
 }
@@ -63,6 +63,7 @@ img {
 
 .weapon {
 	height: 100px;
+	margin:10px;
 }
 
 .browsehappy {
