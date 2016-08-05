@@ -61,21 +61,21 @@
   </div>
   <h2 class="page-header">Choose Your Abilities</h2>
       <ul class="col-xs-3" ng-repeat="ability in abilities">
-        <a href="javascript:"><img class="icon" ng-src="{{ability.icon}}" alt="{{ability.name}}" ng-click="activate(ability)" ng-class="{'inactive' : points >= 57}"></a>
+        <a href="javascript:"><img class="icon" ng-src="{{ability.icon}}" title="{{ability.name}}" ng-click="activate(ability)" ng-class="{'inactive' : points >= 57}"></a>
       </ul>
       </a>
       <button type="button" class="btn btn-default btn-lg" ng-click="clear()">RESET</button>
       <h1 >Mains:</h1>
       <a href="javascript:">
-      <img class="icon"  ng-repeat="main in mains track by $index" ng-src="{{main.icon}}" ng-class="imgtble" alt="{{main.name}}"
+      <img class="icon"  ng-repeat="main in mains track by $index" ng-src="{{main.icon}}" ng-class="imgtble" title="{{main.name}}"
       ng-click="demain(main)" />
       </a>
       <h2 >Subs:</h2>
       <a href="javascript:">
-      <img class="icon" ng-repeat="sub in subs track by $index" ng-style="{padding:10}" ng-src="{{sub.icon}}" ng-class="imgtble" alt="{{sub.name}}" ng-click="desub(sub)"/>
+      <img class="icon" ng-repeat="sub in subs track by $index" ng-style="{padding:10}" ng-src="{{sub.icon}}" ng-class="imgtble" title="{{sub.name}}" ng-click="desub(sub)"/>
       </a>
      <h2>Abilities:</h2>
-     <img class="icon" ng-repeat="main in mains track by $index" ng-src="{{main.icon}}" ng-class="imgtble" alt="{{main.name}}" ng-hide="{{main.stackable}}"/>
+     <img class="icon" ng-repeat="main in mains track by $index" ng-src="{{main.icon}}" ng-class="imgtble" title="{{main.name}}" ng-hide="{{main.stackable}}"/>
      <p></p>
      <h5 ng-repeat="main in mains track by $index" ng-hide="{{main.stackable}}">{{main.name}}:  {{main.effects}}</h5>
 </div>
@@ -109,9 +109,9 @@
       <tr>
         <td><a href="http://splatoonwiki.org/wiki/{{item.uname}}">{{item.name}}</a></td>
         <td><img class="icon" ng-src="assets/images/{{item.uname}}.png" ></td>
-        <td ng-repeat="ability in abilities" ng-show="{{ability.name == item.ability}}"><img class="icon" ng-src="{{ability.icon}}" alt="{{ability.name}}"></img></td>
-        <td ng-style="{'background-color':'#77DD77'}"><img class="icon" ng-repeat="abil in abilities" ng-if="item[abil.name] == '1/3.3'" ng-src="{{abil.icon}}" alt="{{abil.name}}"></img></td>
-        <td ng-style="{'background-color':'#FF6961'}"><img class="icon" ng-repeat="abil in abilities" ng-if="item[abil.name] == '1/33'" ng-src="{{abil.icon}}" alt="{{abil.name}}"></img></td>
+        <td ng-repeat="ability in abilities" ng-show="{{ability.name == item.ability}}"><img class="icon" ng-src="{{ability.icon}}" title="{{ability.name}}"></img></td>
+        <td ng-style="{'background-color':'#77DD77'}"><img class="icon" ng-repeat="abil in abilities" ng-if="item[abil.name] == '1/3.3'" ng-src="{{abil.icon}}" title="{{abil.name}}"></img></td>
+        <td ng-style="{'background-color':'#FF6961'}"><img class="icon" ng-repeat="abil in abilities" ng-if="item[abil.name] == '1/33'" ng-src="{{abil.icon}}" title="{{abil.name}}"></img></td>
       </tr>
     </tbody>
   </table>
