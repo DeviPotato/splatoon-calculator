@@ -14,11 +14,12 @@ splatoonApp.controller('MainCtrl', function ($scope) {
 	angular.module('splatoonApp').specials($scope);
 
 	//Start main logic
-	var points = 0;
+	$scope.points = 0;
 	$scope.mains = [];
 	$scope.subs = [];
 	$scope.effectiveDamage = {};
 	$scope.effectiveSubDamage = {};
+	$scope.subweapon = false;
 	$scope.effectiveSpecialDuration = 0;
 	$scope.showModal = false;
 	$scope.ErrorMessage= 'Testing';
@@ -34,7 +35,6 @@ splatoonApp.controller('MainCtrl', function ($scope) {
     $scope.equipweapon = function(weapon){
 		var swimspeed = 100;
 		var saverbase = 40;
-		swimspeed=weapon.swimspeed;
 		if(weapon.depletion=="Light") {
 			saverbase = 60;
 		}
@@ -46,15 +46,11 @@ splatoonApp.controller('MainCtrl', function ($scope) {
 		}
 		for(var i=0; i < $scope.stats.length; i++){
 			var name = $scope.stats[i].name;
-			if(name=="Swim Speed") {
-				$scope.stats[i].min=swimspeed;
-				calc();
-			}
 			if(name=="Special Save") {
 				$scope.stats[i].min=saverbase;
-				calc();
 			}
 		}
+		calc();
 	}
   
 	$scope.equipweapon($scope.selectedWeapon);
@@ -73,7 +69,7 @@ splatoonApp.controller('MainCtrl', function ($scope) {
 		*/
 
 
-		if (points >= 57) {
+		if ($scope.points >= 57) {
 			//alert('Too Many Abilities!!');
 			$scope.ErrorMessage = 'Too Many Abilities!!';
 			$scope.toggleModal();
@@ -85,7 +81,7 @@ splatoonApp.controller('MainCtrl', function ($scope) {
 
 			if($scope.abilities[i].stackable || $scope.mains.indexOf(ability) == -1){
 				$scope.mains.push($scope.abilities[i]);
-				points+=10;
+				$scope.points+=10;
 				console.log($scope.mains.length);
 
 				console.log($scope.mains[$scope.mains.length-1]);
@@ -101,7 +97,7 @@ splatoonApp.controller('MainCtrl', function ($scope) {
 
 		else if ( $scope.abilities[i].stackable ){
 			$scope.subs.push($scope.abilities[i]);
-			points+=3;
+			$scope.points+=3;
 			calc();
 		}
 		else {
@@ -112,12 +108,12 @@ splatoonApp.controller('MainCtrl', function ($scope) {
 
 	$scope.demain = function(main) {
 		$scope.mains.splice($scope.mains.indexOf(main), 1);
-		points-=10;
+		$scope.points-=10;
 		calc();
 	};
 	$scope.desub = function(sub) {
 		$scope.subs.splice($scope.subs.indexOf(sub), 1);
-		points-=3;
+		$scope.points-=3;
 		calc();
 	};
 
@@ -152,7 +148,15 @@ splatoonApp.controller('MainCtrl', function ($scope) {
 					}
 				}
 			}
-
+			
+		// apply swim penalty
+		//FIXME: bad practice
+		if($scope.selectedWeapon.speedPenalty && $scope.mains.indexOf($scope.abilities[14]) != -1) {
+			$scope.stats[7].min=75;
+		} else if($scope.selectedWeapon.speedPenalty || $scope.mains.indexOf($scope.abilities[14]) != -1) {
+			$scope.stats[7].min=90;
+		} else $scope.stats[7].min=100;
+		
 		for(var i=0; i < $scope.stats.length; i++){
 			var name = $scope.stats[i].name;
 			$scope.stats[i].apply(
@@ -160,6 +164,8 @@ splatoonApp.controller('MainCtrl', function ($scope) {
 				$scope.subs.count(name)
 			);
 		}
+		
+		//TODO: refactor this
 		$scope.effectiveDamage = {};
 		for(var k in $scope.selectedWeapon.damageValues) $scope.effectiveDamage[k]=$scope.selectedWeapon.damageValues[k];
 		for(var key in $scope.effectiveDamage) {
@@ -171,14 +177,16 @@ splatoonApp.controller('MainCtrl', function ($scope) {
 			if(value>99.9 && $scope.selectedWeapon.damageValues[key]<99.9) value = 99.9;
 			$scope.effectiveDamage[key]=value;
 		}
-		var subweapon = $.grep($scope.subweapons, function(e){ return e.name == $scope.selectedWeapon.sub; })[0];
+		
+		$scope.subweapon = $.grep($scope.subweapons, function(e){ return e.name == $scope.selectedWeapon.sub; })[0];
 		$scope.effectiveSubDamage = {};
-		for(var k in subweapon.damageValues) $scope.effectiveSubDamage[k]=subweapon.damageValues[k];
+		for(var k in $scope.subweapon.damageValues) $scope.effectiveSubDamage[k]=$scope.subweapon.damageValues[k];
 		for(var key in $scope.effectiveSubDamage) {
 			var value = $scope.effectiveSubDamage[key];
 			value = ((value*$scope.stats[0].value)/100).toFixed(1)
 			$scope.effectiveSubDamage[key]=value;
 		}
+		
 		var special = $.grep($scope.specials, function(e){ return e.name == $scope.selectedWeapon.special; })[0];
 		var specialDurationAbility = $scope.mains.count("Special Time")*10 + $scope.subs.count("Special Time")*3;
 		if(special.durationCoeff != 1) {
@@ -186,13 +194,15 @@ splatoonApp.controller('MainCtrl', function ($scope) {
 		} else {
 			$scope.effectiveSpecialDuration = special.duration;
 		}
+		
+
 	}
 
 	$scope.clear = function() {
 		console.log('CLEARED');
 		$scope.mains.length=0;
 		$scope.subs.length=0;
-		points = 0;
+		$scope.points = 0;
 		calc();
 	};
 });

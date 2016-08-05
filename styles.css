@@ -66,6 +66,15 @@ img.icon {
 	margin:10px;
 }
 
+.highlight {
+	color: green;
+}
+
+.inactive {
+	-webkit-filter: grayscale(1);
+	filter: grayscale(1);
+	opacity: 0.7;
+}
 .browsehappy {
     margin: 0.2em 0;
     background: #ccc;
