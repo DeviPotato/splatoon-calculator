@@ -25,15 +25,14 @@ Object.defineProperties(Array.prototype, {
 	count: {
 		value: function(stat) {
 			return this.reduce(function (total,perk){
-				//FIXME "negative" does not simply negate a main. Check the wiki.
-				return perk.affects === stat ? (perk.negative ? total-1 : total+1) : total
+				return perk.affects === stat ? (total+1) : total
 			}, 0);
 		}
 	}
 });
 
 angular.module('splatoonApp').stats = function ($scope) {
-
+//TODO: refactor. still not happy with penalty implementation. depends on scope
   $scope.stats = [
     new Stat("Damage", "%", 0, 130, 100, function (x) {
         this.value = Math.min(this.max, 100 + 100*x);
@@ -57,6 +56,13 @@ angular.module('splatoonApp').stats = function ($scope) {
         this.value = Math.min(this.max, (96 * (1 + x))/96*100);
     }),
     new Stat("Swim Speed", "%", 100, 125, 120, function (x) {
+		var hasNinja = ($scope.mains.indexOf($scope.getAbilityByName("Ninja Squid")) != -1);
+		var hasPenalty = ($scope.selectedWeapon.speedPenalty);
+		if(hasPenalty && hasNinja) {
+			this.min=75;
+		} else if(hasPenalty || hasNinja) {
+			this.min=90;
+		} else this.min=100;
         this.value = Math.min(this.max, (192 * (1 + x))/192*this.min);
     }),
     new Stat("Special Charge", "%", 0, 130, 100, function (x) {
@@ -66,17 +72,33 @@ angular.module('splatoonApp').stats = function ($scope) {
         this.value = Math.min(this.max, 100 + 100*x);
     }),
     new Stat("Special Save", "%", 0, 100, 60, function (x) {
+		if($scope.selectedWeapon.depletion=='Light') {
+			this.min = 60;
+		} else if($scope.selectedWeapon.depletion=='Heavy') {
+			this.min = 25;
+		} else {
+			this.min = 40;
+		}
         this.value = Math.min(this.max, this.min + 100*x);
     }),
     new Stat("Respawn Rate", "s", 2, (360 + 30 + 120)/60, 45, function (x) {
         this.value = Math.max(this.min, ((1.0 - x) * 360 + 30 + 120)/60);
     }),
-    new Stat("Jump Speed", "s", 1.5, 3.54, 60, function (x) {
-        this.value = Math.max(this.min, 3 * (1 - x));
+    new Stat("Jump Speed", "s", 2.41, 4.83, 60, function (x) {
+		var hasStealth = ($scope.mains.indexOf($scope.getAbilityByName("Stealth Jump")) != -1);
+		var a = 20+60*(1-x);
+		var b = 130*(1-x);
+		var c = 30;
+		if(hasStealth) c=80;
+        this.value = Math.max(this.min, (a+b+c)/60);
     }),
 		new Stat("Echolocator/Haunt Duration", "s", 4.5, 9, 1, function (x) {
 				this.value = x > 0 ? 4.5 : 9;
 		})
 	];
+	
+	$scope.getStatByName = function(name) {
+        return $.grep($scope.stats, function(e){ return e.name == name; })[0];
+	}
 
 };

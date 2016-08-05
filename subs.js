@@ -54,5 +54,8 @@ angular.module('splatoonApp').subweapons = function ($scope) {
 	},  {
 		name : 'Point Sensor',
 		ink: 40
-	}]
+	}];
+	$scope.getSubweaponByName = function(name) {
+        return $.grep($scope.subweapons, function(e){ return e.name == name; })[0];
+	}
 }
