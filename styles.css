@@ -6,6 +6,10 @@
   text-align: center;
 }
 
+h2 {
+	margin-top:0px;
+}
+
 .thing-form {
     margin: 20px 0;
 }
@@ -41,7 +45,10 @@ img.icon {
    width:70px;
    padding:5px;
 }
-
+img.icon.small {
+   width:50px;
+   padding:5px;
+}
 .imgtble {
     padding:0px;
     width:50px;
@@ -66,8 +73,28 @@ img.icon {
 	margin:10px;
 }
 
+.abilitylist {
+	height: 190px;
+}
+
 .highlight {
 	color: green;
+}
+
+.help {
+	display:inline-block;
+ 	width: 12px;
+	height: 12px;
+	line-height:12px;
+	font-size:11px;
+	font-weight: bold;
+	border-radius:50%;
+	background: #AAA;
+	color: #fff;
+    text-align: center;
+	vertical-align: middle;
+	content: "?";
+	cursor: help;
 }
 
 .inactive {
