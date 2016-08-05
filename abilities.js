@@ -77,8 +77,8 @@ angular.module('splatoonApp').abilities = function ($scope) {
 		icon : 'assets/images/Ability_Stealth_Jump.png',
 		stackable: false,
 		effects: 'Hides jump location from enemy team',
-		affects: 'Jump Speed',
-		negative: true //FIXME "negative" does not simply negate a main. Check the wiki.
+		affects: 'nothing',
+	//	negative: true 
 	},  {
 		name : 'Special Charge Up',
 		info : 'Special Charge Up',
@@ -158,4 +158,7 @@ angular.module('splatoonApp').abilities = function ($scope) {
 		stackable: true,
 		affects: 'Swim Speed'
 	}];
+	$scope.getAbilityByName = function(name) {
+        return $.grep($scope.abilities, function(e){ return e.name == name; })[0];
+	}
 };

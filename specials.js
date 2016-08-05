@@ -35,4 +35,7 @@ angular.module('splatoonApp').specials = function ($scope) {
 		durationCoeff: 50,
 		points: 180
 	}]
+	$scope.getSpecialByName = function(name) {
+        return $.grep($scope.specials, function(e){ return e.name == name; })[0];
+	}
 }

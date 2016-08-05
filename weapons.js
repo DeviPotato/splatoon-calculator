@@ -963,4 +963,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 			"Full Charge" : 80
 			}
 	}];
+	$scope.getWeaponByName = function(name) {
+        return $.grep($scope.weapons, function(e){ return e.name == name; })[0];
+	}
 };

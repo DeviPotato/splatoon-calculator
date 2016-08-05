@@ -5,8 +5,9 @@ var splatoonApp = angular.module('splatoonApp', []);
 
 splatoonApp.controller('MainCtrl', function ($scope) {
 
+	$scope.mains = [];
+	
 	//Load in datatables
-	angular.module('splatoonApp').stats($scope);
 	angular.module('splatoonApp').abilities($scope);
 	angular.module('splatoonApp').gear($scope);
 	angular.module('splatoonApp').weapons($scope);
@@ -15,7 +16,6 @@ splatoonApp.controller('MainCtrl', function ($scope) {
 
 	//Start main logic
 	$scope.points = 0;
-	$scope.mains = [];
 	$scope.subs = [];
 	$scope.effectiveDamage = {};
 	$scope.effectiveSubDamage = {};
@@ -23,8 +23,12 @@ splatoonApp.controller('MainCtrl', function ($scope) {
 	$scope.effectiveSpecialDuration = 0;
 	$scope.showModal = false;
 	$scope.ErrorMessage= 'Testing';
-	
 	$scope.selectedWeapon = $scope.weapons[0];
+	//init stats last
+	angular.module('splatoonApp').stats($scope);
+	
+	calc();
+	
 	for(var i = 0; i < $scope.weapons.length; i++){
 		console.log('hiding gear');
 		$scope.weapons[i].uname = $scope.weapons[i].name.replace(/ /g,'_').replace('.','').replace('\'','');
@@ -32,28 +36,10 @@ splatoonApp.controller('MainCtrl', function ($scope) {
   $scope.toggleModal = function(){
         $scope.showModal = !$scope.showModal;
   };
-    $scope.equipweapon = function(weapon){
-		var swimspeed = 100;
-		var saverbase = 40;
-		if(weapon.depletion=="Light") {
-			saverbase = 60;
-		}
-		else if(weapon.depletion=="Heavy") {
-			saverbase = 25;
-		}
-		else {
-			saverbase = 40;
-		}
-		for(var i=0; i < $scope.stats.length; i++){
-			var name = $scope.stats[i].name;
-			if(name=="Special Save") {
-				$scope.stats[i].min=saverbase;
-			}
-		}
-		calc();
-	}
-  
-	$scope.equipweapon($scope.selectedWeapon);
+  $scope.onWeaponChange = function(){
+        calc();
+  };
+
 	$scope.activate = function(ability){
 
 		/*
@@ -119,7 +105,7 @@ splatoonApp.controller('MainCtrl', function ($scope) {
 
 	// Calc function for finding values
 	function calc() {
-
+		console.log("hi")
 
 		//Hide all gear and show what is selected.
 		for(var i = 0; i < $scope.gear.length; i++){
@@ -149,14 +135,6 @@ splatoonApp.controller('MainCtrl', function ($scope) {
 				}
 			}
 			
-		// apply swim penalty
-		//FIXME: bad practice
-		if($scope.selectedWeapon.speedPenalty && $scope.mains.indexOf($scope.abilities[5]) != -1) {
-			$scope.stats[7].min=75;
-		} else if($scope.selectedWeapon.speedPenalty || $scope.mains.indexOf($scope.abilities[5]) != -1) {
-			$scope.stats[7].min=90;
-		} else $scope.stats[7].min=100;
-		
 		for(var i=0; i < $scope.stats.length; i++){
 			var name = $scope.stats[i].name;
 			$scope.stats[i].apply(
@@ -170,7 +148,7 @@ splatoonApp.controller('MainCtrl', function ($scope) {
 		for(var k in $scope.selectedWeapon.damageValues) $scope.effectiveDamage[k]=$scope.selectedWeapon.damageValues[k];
 		for(var key in $scope.effectiveDamage) {
 			var value = $scope.effectiveDamage[key];
-			value = ((value*$scope.stats[0].value)/100).toFixed(1)
+			value = ((value*$scope.getStatByName("Damage").value)/100).toFixed(1)
 			// splatoon caps main damage values at specific thresholds
 			if(value>33.3 && $scope.selectedWeapon.damageValues[key]<33.3) value = 33.3;
 			if(value>49.9 && $scope.selectedWeapon.damageValues[key]<49.9) value = 49.9;
@@ -183,7 +161,7 @@ splatoonApp.controller('MainCtrl', function ($scope) {
 		for(var k in $scope.subweapon.damageValues) $scope.effectiveSubDamage[k]=$scope.subweapon.damageValues[k];
 		for(var key in $scope.effectiveSubDamage) {
 			var value = $scope.effectiveSubDamage[key];
-			value = ((value*$scope.stats[0].value)/100).toFixed(1)
+			value = ((value*$scope.getStatByName("Damage").value)/100).toFixed(1)
 			$scope.effectiveSubDamage[key]=value;
 		}
 		
