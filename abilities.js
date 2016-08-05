@@ -97,8 +97,8 @@ angular.module('splatoonApp').abilities = function ($scope) {
 		icon : 'assets/images/Ability_Ninja_Squid.png',
 		stackable: false,
 		effects: 'Hides ink movement from enemy team',
-		affects: 'Swim Speed',
-		negative: true, //FIXME "negative" does not simply negate a main. Check the wiki.
+		affects: 'nothing',
+	//	negative: true,
 	}, {
 		name : 'Opening Gambit',
 		info : 'Opening Gambit',

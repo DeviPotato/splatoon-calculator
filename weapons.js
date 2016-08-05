@@ -3,7 +3,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'Splattershot Jr.',
 		type : 'Shooter',
 		depletion : 'Medium',
-		swimspeed : 100,
+		speedPenalty : false,
 		special: 'Bubbler',
 		sub : 'Splat Bomb',
 		damageValues : {
@@ -13,7 +13,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'Custom Splattershot Jr.',
 		type : 'Shooter',
 		depletion : 'Light',
-		swimspeed : 100,
+		speedPenalty : false,
 		special: 'Echolocator',
 		sub : 'Disruptor',
 		damageValues : {
@@ -23,7 +23,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'Splattershot',
 		type : 'Shooter',
 		depletion : 'Light',
-		swimspeed : 100,
+		speedPenalty : false,
 		special: 'Bomb Rush',
 		sub : 'Burst Bomb',
 		damageValues : {
@@ -33,7 +33,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'Hero Shot Replica',
 		type : 'Shooter',
 		depletion : 'Light',
-		swimspeed : 100,
+		speedPenalty : false,
 		special: 'Bomb Rush',
 		sub : 'Burst Bomb',
 		damageValues : {
@@ -43,7 +43,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'Tentatek Splattershot',
 		type : 'Shooter',
 		depletion : 'Heavy',
-		swimspeed : 100,
+		speedPenalty : false,
 		special: 'Inkzooka',
 		sub : 'Suction Bomb',
 		damageValues : {
@@ -53,7 +53,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'Octoshot Replica',
 		type : 'Shooter',
 		depletion : 'Heavy',
-		swimspeed : 100,
+		speedPenalty : false,
 		special: 'Inkzooka',
 		sub : 'Suction Bomb',
 		damageValues : {
@@ -63,7 +63,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'Wasabi Splattershot',
 		type : 'Shooter',
 		depletion : 'Medium',
-		swimspeed : 100,
+		speedPenalty : false,
 		special: 'Inkstrike',
 		sub : 'Splat Bomb',
 		damageValues : {
@@ -73,7 +73,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'Splattershot Pro',
 		type : 'Shooter',
 		depletion : 'Light',
-		swimspeed : 100,
+		speedPenalty : false,
 		special: 'Inkstrike',
 		sub : 'Splat Bomb',
 		damageValues : {
@@ -83,7 +83,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'Forge Splattershot Pro',
 		type : 'Shooter',
 		depletion : 'Light',
-		swimspeed : 100,
+		speedPenalty : false,
 		special: 'Inkzooka',
 		sub : 'Point Sensor',
 		damageValues : {
@@ -93,7 +93,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'Berry Splattershot Pro',
 		type : 'Shooter',
 		depletion : 'Medium',
-		swimspeed : 100,
+		speedPenalty : false,
 		special: 'Bomb Rush',
 		sub : 'Suction Bomb',
 		damageValues : {
@@ -103,7 +103,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'Aerospray MG',
 		type : 'Shooter',
 		depletion : 'Light',
-		swimspeed : 100,
+		speedPenalty : false,
 		special: 'Inkzooka',
 		sub : 'Seeker',
 		damageValues : {
@@ -113,7 +113,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'Aerospray RG',
 		type : 'Shooter',
 		depletion : 'Light',
-		swimspeed : 100,
+		speedPenalty : false,
 		special: 'Inkstrike',
 		sub : 'Ink Mine',
 		damageValues : {
@@ -123,7 +123,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'Aerospray PG',
 		type : 'Shooter',
 		depletion : 'Medium',
-		swimspeed : 100,
+		speedPenalty : false,
 		special: 'Kraken',
 		sub : 'Burst Bomb',
 		damageValues : {
@@ -133,7 +133,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'Jet Squelcher',
 		type : 'Shooter',
 		depletion : 'Light',
-		swimspeed : 100,
+		speedPenalty : false,
 		special: 'Inkstrike',
 		sub : 'Splash Wall',
 		damageValues : {
@@ -143,7 +143,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'Custom Jet Squelcher',
 		type : 'Shooter',
 		depletion : 'Light',
-		swimspeed : 100,
+		speedPenalty : false,
 		special: 'Kraken',
 		sub : 'Burst Bomb',
 		damageValues : {
@@ -153,7 +153,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'Dual Squelcher',
 		type : 'Shooter',
 		depletion : 'Light',
-		swimspeed : 100,
+		speedPenalty : false,
 		special: 'Echolocator',
 		sub : 'Splat Bomb',
 		damageValues : {
@@ -163,7 +163,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'Custom Dual Squelcher',
 		type : 'Shooter',
 		depletion : 'Light',
-		swimspeed : 100,
+		speedPenalty : false,
 		special: 'Killer Wail',
 		sub : 'Squid Beakon',
 		damageValues : {
@@ -173,7 +173,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'L-3 Nozzlenose',
 		type : 'Shooter',
 		depletion : 'Light',
-		swimspeed : 100,
+		speedPenalty : false,
 		special: 'Killer Wail',
 		sub : 'Disruptor',
 		damageValues : {
@@ -183,7 +183,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'L-3 Nozzlenose D',
 		type : 'Shooter',
 		depletion : 'Medium',
-		swimspeed : 100,
+		speedPenalty : false,
 		special: 'Kraken',
 		sub : 'Burst Bomb',
 		damageValues : {
@@ -193,7 +193,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'H-3 Nozzlenose',
 		type : 'Shooter',
 		depletion : 'Light',
-		swimspeed : 100,
+		speedPenalty : false,
 		special: 'Echolocator',
 		sub : 'Suction Bomb',
 		damageValues : {
@@ -203,7 +203,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'H-3 Nozzlenose D',
 		type : 'Shooter',
 		depletion : 'Light',
-		swimspeed : 100,
+		speedPenalty : false,
 		special: 'Inkzooka',
 		sub : 'Point Sensor',
 		damageValues : {
@@ -213,7 +213,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'Cherry H-3 Nozzlenose',
 		type : 'Shooter',
 		depletion : 'Light',
-		swimspeed : 100,
+		speedPenalty : false,
 		special: 'Bubbler',
 		sub : 'Splash Wall',
 		damageValues : {
@@ -223,7 +223,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'N-ZAP \'85',
 		type : 'Shooter',
 		depletion : 'Light',
-		swimspeed : 100,
+		speedPenalty : false,
 		special: 'Echolocator',
 		sub : 'Splat Bomb',
 		damageValues : {
@@ -233,7 +233,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'N-ZAP \'89',
 		type : 'Shooter',
 		depletion : 'Light',
-		swimspeed : 100,
+		speedPenalty : false,
 		special: 'Inkstrike',
 		sub : 'Sprinkler',
 		damageValues : {
@@ -243,7 +243,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'N-ZAP \'83',
 		type : 'Shooter',
 		depletion : 'Medium',
-		swimspeed : 100,
+		speedPenalty : false,
 		special: 'Kraken',
 		sub : 'Point Sensor',
 		damageValues : {
@@ -253,7 +253,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'Splash-o-matic',
 		type : 'Shooter',
 		depletion : 'Light',
-		swimspeed : 100,
+		speedPenalty : false,
 		special: 'Bomb Rush',
 		sub : 'Splat Bomb',
 		damageValues : {
@@ -263,7 +263,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'Neo Splash-o-matic',
 		type : 'Shooter',
 		depletion : 'Light',
-		swimspeed : 100,
+		speedPenalty : false,
 		special: 'Inkzooka',
 		sub : 'Burst Bomb',
 		damageValues : {
@@ -273,7 +273,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'Sploosh-o-matic',
 		type : 'Shooter',
 		depletion : 'Light',
-		swimspeed : 100,
+		speedPenalty : false,
 		special: 'Killer Wail',
 		sub : 'Squid Beakon',
 		damageValues : {
@@ -283,7 +283,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'Neo Sploosh-o-matic',
 		type : 'Shooter',
 		depletion : 'Light',
-		swimspeed : 100,
+		speedPenalty : false,
 		special: 'Kraken',
 		sub : 'Point Sensor',
 		damageValues : {
@@ -293,7 +293,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'Sploosh-o-matic 7',
 		type : 'Shooter',
 		depletion : 'Light',
-		swimspeed : 100,
+		speedPenalty : false,
 		special: 'Inkzooka',
 		sub : 'Splat Bomb',
 		damageValues : {
@@ -303,7 +303,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : '.52 Gal',
 		type : 'Shooter',
 		depletion : 'Medium',
-		swimspeed : 100,
+		speedPenalty : false,
 		special: 'Killer Wail',
 		sub : 'Splash Wall',
 		damageValues : {
@@ -313,7 +313,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : '.52 Gal Deco',
 		type : 'Shooter',
 		depletion : 'Light',
-		swimspeed : 100,
+		speedPenalty : false,
 		special: 'Inkstrike',
 		sub : 'Seeker',
 		damageValues : {
@@ -323,7 +323,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : '.96 Gal',
 		type : 'Shooter',
 		depletion : 'Light',
-		swimspeed : 100,
+		speedPenalty : false,
 		special: 'Echolocator',
 		sub : 'Sprinkler',
 		damageValues : {
@@ -333,7 +333,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : '.96 Gal Deco',
 		type : 'Shooter',
 		depletion : 'Light',
-		swimspeed : 100,
+		speedPenalty : false,
 		special: 'Kraken',
 		sub : 'Splash Wall',
 		damageValues : {
@@ -343,7 +343,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'Splat Roller',
 		type : 'Roller',
 		depletion : 'Light',
-		swimspeed : 100,
+		speedPenalty : false,
 		special: 'Killer Wail',
 		sub : 'Suction Bomb',
 		damageValues : {
@@ -355,7 +355,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'Hero Roller Replica',
 		type : 'Roller',
 		depletion : 'Light',
-		swimspeed : 100,
+		speedPenalty : false,
 		special: 'Killer Wail',
 		sub : 'Suction Bomb',
 		damageValues : {
@@ -367,7 +367,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'Krak-on Splat Roller',
 		type : 'Roller',
 		depletion : 'Medium',
-		swimspeed : 100,
+		speedPenalty : false,
 		special: 'Kraken',
 		sub : 'Squid Beakon',
 		damageValues : {
@@ -379,7 +379,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'CoroCoro Splat Roller',
 		type : 'Roller',
 		depletion : 'Light',
-		swimspeed : 100,
+		speedPenalty : false,
 		special: 'Inkzooka',
 		sub : 'Splash Wall',
 		damageValues : {
@@ -391,7 +391,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'Carbon Roller',
 		type : 'Roller',
 		depletion : 'Medium',
-		swimspeed : 100,
+		speedPenalty : false,
 		special: 'Inkzooka',
 		sub : 'Splat Bomb',
 		damageValues : {
@@ -403,7 +403,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'Carbon Roller Deco',
 		type : 'Roller',
 		depletion : 'Light',
-		swimspeed : 100,
+		speedPenalty : false,
 		special: 'Bomb Rush',
 		sub : 'Seeker',
 		damageValues : {
@@ -415,7 +415,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'Dynamo Roller',
 		type : 'Roller',
 		depletion : 'Heavy',
-		swimspeed : 90,
+		speedPenalty : true,
 		special: 'Echolocator',
 		sub : 'Sprinkler',
 		damageValues : {
@@ -427,7 +427,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'Gold Dynamo Roller',
 		type : 'Roller',
 		depletion : 'Heavy',
-		swimspeed : 90,
+		speedPenalty : true,
 		special: 'Inkstrike',
 		sub : 'Splat Bomb',
 		damageValues : {
@@ -439,7 +439,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'Tempered Dynamo Roller',
 		type : 'Roller',
 		depletion : 'Heavy',
-		swimspeed : 90,
+		speedPenalty : true,
 		special: 'Killer Wail',
 		sub : 'Seeker',
 		damageValues : {
@@ -451,7 +451,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'Inkbrush',
 		type : 'Roller',
 		depletion : 'Light',
-		swimspeed : 100,
+		speedPenalty : false,
 		special: 'Inkstrike',
 		sub : 'Sprinkler',
 		damageValues : {
@@ -462,7 +462,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'Inkbrush Nouveau',
 		type : 'Roller',
 		depletion : 'Light',
-		swimspeed : 100,
+		speedPenalty : false,
 		special: 'Bubbler',
 		sub : 'Ink Mine',
 		damageValues : {
@@ -473,7 +473,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'Permanent Inkbrush',
 		type : 'Roller',
 		depletion : 'Light',
-		swimspeed : 100,
+		speedPenalty : false,
 		special: 'Kraken',
 		sub : 'Splat Bomb',
 		damageValues : {
@@ -484,7 +484,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'Octobrush',
 		type : 'Roller',
 		depletion : 'Light',
-		swimspeed : 100,
+		speedPenalty : false,
 		special: 'Kraken',
 		sub : 'Squid Beakon',
 		damageValues : {
@@ -495,7 +495,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'Octobrush Nouveau',
 		type : 'Roller',
 		depletion : 'Light',
-		swimspeed : 100,
+		speedPenalty : false,
 		special: 'Inkzooka',
 		sub : 'Splat Bomb',
 		damageValues : {
@@ -506,7 +506,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'Blaster',
 		type : 'Blaster',
 		depletion : 'Light',
-		swimspeed : 100,
+		speedPenalty : false,
 		special: 'Killer Wail',
 		sub : 'Disruptor',
 		damageValues : {
@@ -517,7 +517,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'Custom Blaster',
 		type : 'Blaster',
 		depletion : 'Medium',
-		swimspeed : 100,
+		speedPenalty : false,
 		special: 'Bubbler',
 		sub : 'Point Sensor',
 		damageValues : {
@@ -528,7 +528,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'Range Blaster',
 		type : 'Blaster',
 		depletion : 'Light',
-		swimspeed : 100,
+		speedPenalty : false,
 		special: 'Inkstrike',
 		sub : 'Splash Wall',
 		damageValues : {
@@ -539,7 +539,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'Custom Range Blaster',
 		type : 'Blaster',
 		depletion : 'Light',
-		swimspeed : 100,
+		speedPenalty : false,
 		special: 'Kraken',
 		sub : 'Splat Bomb',
 		damageValues : {
@@ -550,7 +550,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'Grim Range Blaster',
 		type : 'Blaster',
 		depletion : 'Light',
-		swimspeed : 100,
+		speedPenalty : false,
 		special: 'Killer Wail',
 		sub : 'Burst Bomb',
 		damageValues : {
@@ -561,7 +561,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'Rapid Blaster',
 		type : 'Blaster',
 		depletion : 'Light',
-		swimspeed : 100,
+		speedPenalty : false,
 		special: 'Bubbler',
 		sub : 'Ink Mine',
 		damageValues : {
@@ -572,7 +572,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'Rapid Blaster Deco',
 		type : 'Blaster',
 		depletion : 'Light',
-		swimspeed : 100,
+		speedPenalty : false,
 		special: 'Bomb Rush',
 		sub : 'Suction Bomb',
 		damageValues : {
@@ -583,7 +583,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'Luna Blaster',
 		type : 'Blaster',
 		depletion : 'Light',
-		swimspeed : 100,
+		speedPenalty : false,
 		special: 'Inkzooka',
 		sub : 'Ink Mine',
 		damageValues : {
@@ -594,7 +594,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'Luna Blaster Neo',
 		type : 'Blaster',
 		depletion : 'Heavy',
-		swimspeed : 100,
+		speedPenalty : false,
 		special: 'Bomb Rush',
 		sub : 'Splat Bomb',
 		damageValues : {
@@ -605,7 +605,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'Rapid Blaster Pro',
 		type : 'Blaster',
 		depletion : 'Light',
-		swimspeed : 100,
+		speedPenalty : false,
 		special: 'Inkzooka',
 		sub : 'Seeker',
 		damageValues : {
@@ -616,7 +616,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'Rapid Blaster Pro Deco',
 		type : 'Blaster',
 		depletion : 'Light',
-		swimspeed : 100,
+		speedPenalty : false,
 		special: 'Killer Wail',
 		sub : 'Disruptor',
 		damageValues : {
@@ -627,7 +627,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'Heavy Splatling',
 		type : 'Splatling',
 		depletion : 'Light',
-		swimspeed : 100,
+		speedPenalty : false,
 		special: 'Inkstrike',
 		sub : 'Splash Wall',
 		damageValues : {
@@ -637,7 +637,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'Heavy Splatling Deco',
 		type : 'Splatling',
 		depletion : 'Medium',
-		swimspeed : 100,
+		speedPenalty : false,
 		special: 'Kraken',
 		sub : 'Point Sensor',
 		damageValues : {
@@ -647,7 +647,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'Heavy Splatling Remix',
 		type : 'Splatling',
 		depletion : 'Light',
-		swimspeed : 100,
+		speedPenalty : false,
 		special: 'Killer Wail',
 		sub : 'Sprinkler',
 		damageValues : {
@@ -657,7 +657,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'Mini Splatling',
 		type : 'Splatling',
 		depletion : 'Light',
-		swimspeed : 100,
+		speedPenalty : false,
 		special: 'Inkzooka',
 		sub : 'Suction Bomb',
 		damageValues : {
@@ -667,7 +667,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'Zink Mini Splatling',
 		type : 'Splatling',
 		depletion : 'Heavy',
-		swimspeed : 100,
+		speedPenalty : false,
 		special: 'Bubbler',
 		sub : 'Disruptor',
 		damageValues : {
@@ -677,7 +677,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'Refurbished Mini Splatling',
 		type : 'Splatling',
 		depletion : 'Light',
-		swimspeed : 100,
+		speedPenalty : false,
 		special: 'Bomb Rush',
 		sub : 'Burst Bomb',
 		damageValues : {
@@ -687,7 +687,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'Hydra Splatling',
 		type : 'Splatling',
 		depletion : 'Light',
-		swimspeed : 90,
+		speedPenalty : true,
 		special: 'Echolocator',
 		sub : 'Splat Bomb',
 		damageValues : {
@@ -698,7 +698,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'Custom Hydra Splatling',
 		type : 'Splatling',
 		depletion : 'Light',
-		swimspeed : 90,
+		speedPenalty : true,
 		special: 'Bubbler',
 		sub : 'Sprinkler',
 		damageValues : {
@@ -709,7 +709,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'Splat Charger',
 		type : 'Charger',
 		depletion : 'Heavy',
-		swimspeed : 100,
+		speedPenalty : false,
 		special: 'Bomb Rush',
 		sub : 'Splat Bomb',
 		damageValues : {
@@ -720,7 +720,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'Slosher',
 		type : 'Slosher',
 		depletion : 'Light',
-		swimspeed : 100,
+		speedPenalty : false,
 		special: 'Inkstrike',
 		sub : 'Burst Bomb',
 		damageValues : {
@@ -730,7 +730,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'Slosher Deco',
 		type : 'Slosher',
 		depletion : 'Light',
-		swimspeed : 100,
+		speedPenalty : false,
 		special: 'Kraken',
 		sub : 'Splash Wall',
 		damageValues : {
@@ -740,7 +740,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'Soda Slosher',
 		type : 'Slosher',
 		depletion : 'Light',
-		swimspeed : 100,
+		speedPenalty : false,
 		special : 'Inkzooka',
 		sub : 'Splat Bomb',
 		damageValues : {
@@ -750,7 +750,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'Tri-Slosher',
 		type : 'Slosher',
 		depletion : 'Medium',
-		swimspeed : 100,
+		speedPenalty : false,
 		special : 'Bubbler',
 		sub : 'Disruptor',
 		damageValues : {
@@ -760,7 +760,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'Tri-Slosher Nouveau',
 		type : 'Slosher',
 		depletion : 'Light',
-		swimspeed : 100,
+		speedPenalty : false,
 		special : 'Echolocator',
 		sub : 'Seeker',
 		damageValues : {
@@ -770,7 +770,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'Sloshing Machine',
 		type : 'Slosher',
 		depletion : 'Light',
-		swimspeed : 100,
+		speedPenalty : false,
 		special : 'Bomb Rush',
 		sub : 'Splat Bomb',
 		damageValues : {
@@ -780,7 +780,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'Sloshing Machine Neo',
 		type : 'Slosher',
 		depletion : 'Light',
-		swimspeed : 100,
+		speedPenalty : false,
 		special : 'Inkzooka',
 		sub : 'Point Sensor',
 		damageValues : {
@@ -790,7 +790,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
         name : 'Splat Charger',
         type : 'Charger',
         depletion : 'Heavy',
-        swimspeed : 100,
+        speedPenalty : false,
         special: 'Bomb Rush',
         sub : 'Splat Bomb',
         damageValues : {
@@ -801,7 +801,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
         name : 'Kelp Splat Charger',
         type : 'Charger',
         depletion : 'Medium',
-        swimspeed : 100,
+        speedPenalty : false,
         special: 'Killer Wail',
         sub : 'Sprinkler',
         damageValues : {
@@ -812,7 +812,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'Bento Splat Charger',
 		type : 'Charger',
 		depletion : 'Medium',
-		swimspeed : 100,
+		speedPenalty : false,
 		special : 'Echolocator',
 		sub : 'Splash Wall',
 		damageValues : {
@@ -823,7 +823,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'Splatterscope',
 		type : 'Charger',
 		depletion : 'Heavy',
-		swimspeed : 100,
+		speedPenalty : false,
 		special : 'Bomb Rush',
 		sub : 'Splat Bomb',
 		damageValues : {
@@ -834,7 +834,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'Kelp Splatterscope',
 		type : 'Charger',
 		depletion : 'Medium',
-		swimspeed : 100,
+		speedPenalty : false,
 		special : 'Killer Wail',
 		sub : 'Sprinkler',
 		damageValues : {
@@ -845,7 +845,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'Bento Splatterscope',
 		type : 'Charger',
 		depletion : 'Medium',
-		swimspeed : 100,
+		speedPenalty : false,
 		special : 'Echolocator',
 		sub : 'Splash Wall',
 		damageValues : {
@@ -856,7 +856,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'E-liter 3K',
 		type : 'Charger',
 		depletion : 'Medium',
-		swimspeed : 90,
+		speedPenalty : true,
 		special : 'Echolocator',
 		sub : 'Burst Bomb',
 		damageValues : {
@@ -867,7 +867,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'Custom E-liter 3K',
 		type : 'Charger',
 		depletion : 'Medium',
-		swimspeed : 90,
+		speedPenalty : true,
 		special : 'Kraken',
 		sub : 'Squid Beakon',
 		damageValues : {
@@ -878,7 +878,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'E-liter 3K Scope',
 		type : 'Charger',
 		depletion : 'Medium',
-		swimspeed : 90,
+		speedPenalty : true,
 		special : 'Echolocator',
 		sub : 'Burst Bomb',
 		damageValues : {
@@ -889,7 +889,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'Custom E-liter 3K Scope',
 		type : 'Charger',
 		depletion : 'Medium',
-		swimspeed : 90,
+		speedPenalty : true,
 		special : 'Kraken',
 		sub : 'Squid Beakon',
 		damageValues : {
@@ -900,7 +900,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'Classic Squiffer',
 		type : 'Charger',
 		depletion : 'Light',
-		swimspeed : 100,
+		speedPenalty : false,
 		special : 'Bubbler',
 		sub : 'Point Sensor',
 		damageValues : {
@@ -911,7 +911,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'New Squiffer',
 		type : 'Charger',
 		depletion : 'Light',
-		swimspeed : 100,
+		speedPenalty : false,
 		special : 'Inkzooka',
 		sub : 'Ink Mine',
 		damageValues : {
@@ -922,7 +922,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'Fresh Squiffer',
 		type : 'Charger',
 		depletion : 'Medium',
-		swimspeed : 100,
+		speedPenalty : false,
 		special : 'Kraken',
 		sub : 'Suction Bomb',
 		damageValues : {
@@ -933,7 +933,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'Bamboozler 14 Mk I',
 		type : 'Charger',
 		depletion : 'Light',
-		swimspeed : 100,
+		speedPenalty : false,
 		special : 'Killer Wail',
 		sub : 'Splash Wall',
 		damageValues : {
@@ -944,7 +944,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'Bamboozler 14 Mk II',
 		type : 'Charger',
 		depletion : 'Light',
-		swimspeed : 100,
+		speedPenalty : false,
 		special : 'Echolocator',
 		sub : 'Disruptor',
 		damageValues : {
@@ -955,7 +955,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		name : 'Bamboozler 14 Mk III',
 		type : 'Charger',
 		depletion : 'Heavy',
-		swimspeed : 100,
+		speedPenalty : false,
 		special : 'Inkstrike',
 		sub : 'Burst Bomb',
 		damageValues : {

@@ -52,16 +52,16 @@
   <div class="weapon">
   <div class="row">
   <div class="col-md-2 col-sm-2"><img src="assets/images/weapons/{{selectedWeapon.uname}}.png"></div>
-  <div class="col-md-5 col-sm-5 col-xs-12"><span ng-repeat="(key, value) in effectiveDamage"><b>{{key}}</b>: {{value}}<br></span></div>
+  <div class="col-md-5 col-sm-5 col-xs-12"><span ng-repeat="(key, value) in effectiveDamage"><b>{{key}}</b>: <span ng-class="{'highlight' : effectiveDamage[key]>selectedWeapon.damageValues[key]}">{{value}}</span><br></span></div>
   <div class="col-md-5 col-sm-5 col-xs-12"><b>Subweapon:</b> {{selectedWeapon.sub}}<br>
-  <span ng-repeat="(key, value) in effectiveSubDamage" style="margin-left:10px; font-size: 9pt"><b>{{key}}</b>: {{value}}<br></span>
+  <span ng-repeat="(key, value) in effectiveSubDamage" style="margin-left:10px; font-size: 9pt"><b>{{key}}</b>: <span ng-class="{'highlight' : effectiveSubDamage[key]>subweapon.damageValues[key]}">{{value}}</span><br></span>
   <b>Special:</b> {{selectedWeapon.special}}<br>
   <span  style="margin-left:10px; font-size: 9pt"><b>Duration:</b> {{effectiveSpecialDuration.toFixed(2)}}s</div>
   </div>
   </div>
   <h2 class="page-header">Choose Your Abilities</h2>
       <ul class="col-xs-3" ng-repeat="ability in abilities">
-        <a href="javascript:"><img class="icon" ng-src="{{ability.icon}}" alt="{{ability.name}}" ng-click="activate(ability)"></a>
+        <a href="javascript:"><img class="icon" ng-src="{{ability.icon}}" alt="{{ability.name}}" ng-click="activate(ability)" ng-class="{'inactive' : points >= 57}"></a>
       </ul>
       </a>
       <button type="button" class="btn btn-default btn-lg" ng-click="clear()">RESET</button>
