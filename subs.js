@@ -1,5 +1,5 @@
-angular.module('splatoonApp').subs = function ($scope) {
-	$scope.subs =[{
+angular.module('splatoonApp').subweapons = function ($scope) {
+	$scope.subweapons =[{
 		name : 'Splat Bomb',
 		ink: 70,
 		damageValues : {

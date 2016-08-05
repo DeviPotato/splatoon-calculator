@@ -10,17 +10,24 @@ splatoonApp.controller('MainCtrl', function ($scope) {
 	angular.module('splatoonApp').abilities($scope);
 	angular.module('splatoonApp').gear($scope);
 	angular.module('splatoonApp').weapons($scope);
+	angular.module('splatoonApp').subweapons($scope);
+	angular.module('splatoonApp').specials($scope);
 
 	//Start main logic
 	var points = 0;
 	$scope.mains = [];
 	$scope.subs = [];
 	$scope.effectiveDamage = {};
+	$scope.effectiveSubDamage = {};
+	$scope.effectiveSpecialDuration = 0;
 	$scope.showModal = false;
 	$scope.ErrorMessage= 'Testing';
 	
 	$scope.selectedWeapon = $scope.weapons[0];
-	
+	for(var i = 0; i < $scope.weapons.length; i++){
+		console.log('hiding gear');
+		$scope.weapons[i].uname = $scope.weapons[i].name.replace(/ /g,'_').replace('.','').replace('\'','');
+	 }
   $scope.toggleModal = function(){
         $scope.showModal = !$scope.showModal;
   };
@@ -158,11 +165,26 @@ splatoonApp.controller('MainCtrl', function ($scope) {
 		for(var key in $scope.effectiveDamage) {
 			var value = $scope.effectiveDamage[key];
 			value = ((value*$scope.stats[0].value)/100).toFixed(1)
-			// splatoon caps damage values at specific thresholds
+			// splatoon caps main damage values at specific thresholds
 			if(value>33.3 && $scope.selectedWeapon.damageValues[key]<33.3) value = 33.3;
 			if(value>49.9 && $scope.selectedWeapon.damageValues[key]<49.9) value = 49.9;
 			if(value>99.9 && $scope.selectedWeapon.damageValues[key]<99.9) value = 99.9;
 			$scope.effectiveDamage[key]=value;
+		}
+		var subweapon = $.grep($scope.subweapons, function(e){ return e.name == $scope.selectedWeapon.sub; })[0];
+		$scope.effectiveSubDamage = {};
+		for(var k in subweapon.damageValues) $scope.effectiveSubDamage[k]=subweapon.damageValues[k];
+		for(var key in $scope.effectiveSubDamage) {
+			var value = $scope.effectiveSubDamage[key];
+			value = ((value*$scope.stats[0].value)/100).toFixed(1)
+			$scope.effectiveSubDamage[key]=value;
+		}
+		var special = $.grep($scope.specials, function(e){ return e.name == $scope.selectedWeapon.special; })[0];
+		var specialDurationAbility = $scope.mains.count("Special Time")*10 + $scope.subs.count("Special Time")*3;
+		if(special.durationCoeff != 1) {
+		$scope.effectiveSpecialDuration =  (1+((0.99 * specialDurationAbility) - Math.pow((0.09 * specialDurationAbility),2)) / special.durationCoeff) * special.duration;
+		} else {
+			$scope.effectiveSpecialDuration = special.duration;
 		}
 	}
 

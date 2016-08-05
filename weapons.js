@@ -369,7 +369,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		depletion : 'Medium',
 		swimspeed : 100,
 		special: 'Kraken',
-		sub : 'Squid Beacon',
+		sub : 'Squid Beakon',
 		damageValues : {
 			"Min. Splash" : 25,
 			"Max. Splash" : 125,
@@ -692,7 +692,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		sub : 'Splat Bomb',
 		damageValues : {
 			"Damage Per Hit" : 28,
-			"Charged Damage Per Hit" : 35
+			"Charged Damage" : 35
 		}
 	}, {
 		name : 'Custom Hydra Splatling',
@@ -703,7 +703,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		sub : 'Sprinkler',
 		damageValues : {
 			"Damage Per Hit" : 28,
-			"Charged Damage Per Hit" : 35
+			"Charged Damage" : 35
 		}
 	},  {
 		name : 'Splat Charger',
@@ -869,7 +869,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		depletion : 'Medium',
 		swimspeed : 90,
 		special : 'Kraken',
-		sub : 'Squid Beacon',
+		sub : 'Squid Beakon',
 		damageValues : {
 			"No Charge" : 40,
 			"Full Charge" : 180
@@ -891,7 +891,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 		depletion : 'Medium',
 		swimspeed : 90,
 		special : 'Kraken',
-		sub : 'Squid Beacon',
+		sub : 'Squid Beakon',
 		damageValues : {
 			"No Charge" : 40,
 			"Full Charge" : 180

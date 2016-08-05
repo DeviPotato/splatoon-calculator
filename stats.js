@@ -74,8 +74,8 @@ angular.module('splatoonApp').stats = function ($scope) {
     new Stat("Jump Speed", "s", 1.5, 3.54, 60, function (x) {
         this.value = Math.max(this.min, 3 * (1 - x));
     }),
-		new Stat("Echolocator/Haunt Duration", "s", 3, 12, 1, function (x) {
-				this.value = x > 0 ? 3 : 12;
+		new Stat("Echolocator/Haunt Duration", "s", 4.5, 9, 1, function (x) {
+				this.value = x > 0 ? 4.5 : 9;
 		})
 	];
 
