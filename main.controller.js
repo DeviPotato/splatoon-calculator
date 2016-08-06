@@ -23,18 +23,25 @@ splatoonApp.controller('MainCtrl', function ($scope) {
 	$scope.effectiveSpecialDuration = 0;
 	$scope.showModal = false;
 	$scope.ErrorMessage= 'Testing';
-	$scope.selectedWeapon = $scope.weapons[0];
+	$scope.selectedCategory = $scope.weapons[0];
+	$scope.selectedWeapon = $scope.selectedCategory.weapons[0];
+	
 	//init stats last
 	angular.module('splatoonApp').stats($scope);
 	
 	calc();
 	
-	for(var i = 0; i < $scope.weapons.length; i++){
-		console.log('hiding gear');
-		$scope.weapons[i].uname = $scope.weapons[i].name.replace(/ /g,'_').replace('.','').replace('\'','');
+	for(let category of $scope.weapons){
+		for(let weapon of category.weapons){
+			weapon.uname = weapon.name.replace(/ /g,'_').replace('.','').replace('\'','');
+		 }
 	 }
   $scope.toggleModal = function(){
         $scope.showModal = !$scope.showModal;
+  };
+  $scope.onCategoryChange = function(){
+		$scope.selectedWeapon = $scope.selectedCategory.weapons[0];
+		$scope.onWeaponChange();
   };
   $scope.onWeaponChange = function(){
         calc();

@@ -9,11 +9,8 @@
   <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js'></script>
   <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js'></script>
   <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js'></script>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.14.3/ui-bootstrap-tpls.min.js'></script>
-
-
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
 <script src='main.controller.js'></script>
 <script src='stats.js'></script>
@@ -46,8 +43,8 @@
 <div class="col-md-6">
   <h2 class="page-header">Weapon</h2>
   <div class="row">
-  <div class="col-md-6"><select class="form-control btn btn-primary dropdown-toggle" data-ng-model="selectedWeapon" data-ng-options="x.name for x in weapons" data-ng-change="onWeaponChange()"></select></div>
-  <!--<div class="col-md-6"><select class="form-control btn btn-primary dropdown-toggle"><option>Placeholder</option></select></div> -->
+  <div class="col-md-6"><select class="form-control btn btn-primary dropdown-toggle" data-ng-model="selectedCategory" data-ng-options="x.type for x in weapons" data-ng-change="onCategoryChange()"></select></div>
+  <div class="col-md-6"><select class="form-control btn btn-primary dropdown-toggle" data-ng-model="selectedWeapon" data-ng-options="x.name for x in selectedCategory.weapons" data-ng-change="onWeaponChange()"></select></div>
   </div>
   <div class="weapon">
   <div class="row">
@@ -153,7 +150,7 @@
          <a href="https://docs.google.com/spreadsheets/d/1mE97vf8FxdfvR6pt7tFvYXkYGSZGg4AsrTI_2veUlbs">Roll Information</a> |
          <a href="http://wikiwiki.jp/splatoon2ch/?%A5%AE%A5%A2%A5%D1%A5%EF%A1%BC%B8%A1%BE%DA">Ability Information</a> |
          <a href="http://splatoonwiki.org/wiki/">Inkipedia</a>
-          | <a href="https://github.com/lolcookie/splatoon-calculator">GitHub</a>
+          | <a href="https://github.com/DeviPotato/splatoon-calculator">GitHub</a>
          </p>
   </div>
 </footer>
