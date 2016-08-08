@@ -31,8 +31,6 @@ splatoonApp.controller('MainCtrl', function ($scope) {
 	//init stats last
 	angular.module('splatoonApp').stats($scope);
 	
-	calc();
-	
 	for(let category of $scope.weapons){
 		for(let weapon of category.weapons){
 			weapon.uname = weapon.name.replace(/ /g,'_').replace('.','').replace('\'','');
@@ -237,8 +235,9 @@ splatoonApp.controller('MainCtrl', function ($scope) {
 		$scope.points = 0;
 		calc();
 	};
-	
+	//FIXME: move to onload function
 	loadFromURL(window.location.href)
+	calc();
 });
 
 splatoonApp.directive('modal', function () {
