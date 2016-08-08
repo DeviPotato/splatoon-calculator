@@ -37,8 +37,8 @@ angular.module('splatoonApp').stats = function ($scope) {
     new Stat("Damage", "%", 0, 130, 100, function (x) {
         this.value = Math.min(this.max, 100 + 100*x);
     }),
-    new Stat("Defense", "%", 83.3, 100, 100, function (x) {
-        this.value = Math.max(this.min, 100 - 100*(x/1.8));
+    new Stat("Damage Taken", "%", 70, 100, 100, function (x) {
+        this.value = Math.max(this.min, 100 * (1 - x/1.8));
     }),
     new Stat("Ink Recovery", "s", 1.65, 3, 200/3, function (x) {
         this.value = Math.max(this.min, 3 * (1.0 - x));

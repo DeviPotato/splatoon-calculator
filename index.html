@@ -19,12 +19,15 @@
 <script src='weapons.js'></script>
 <script src='subs.js'></script>
 <script src='specials.js'></script>
+<script src='encoder.js'></script>
 
 
 
 
 <link  href="styles.css" rel="stylesheet">
 </head>
+
+
 <body ng-app="splatoonApp" ng-controller="MainCtrl">
 <header class="hero-unit" id="banner">
   <div class="container">
@@ -39,7 +42,9 @@
   <modal title="Errorbox" visible="showModal" id="modal">
   </modal>
 
-
+<div class="col-md-12">
+  <input type="text" class="form-control" ng-model="stateURL" ng-change="onCodeChange()"></input>
+</div>
 <div class="col-md-6">
   <h2 class="page-header">Weapon</h2>
   <div class="row">
