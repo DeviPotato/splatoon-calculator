@@ -56,6 +56,11 @@ angular.module('splatoonApp').subweapons = function ($scope) {
 		ink: 40
 	}];
 	$scope.getSubweaponByName = function(name) {
-        return $.grep($scope.subweapons, function(e){ return e.name == name; })[0];
+		for(var i=0; i<$scope.subweapons.length; i++) {
+			if($scope.subweapons[i].name==name) {
+				return $scope.subweapons[i]
+			}
+		}
+		return false;
 	}
 }
