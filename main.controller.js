@@ -52,11 +52,11 @@ splatoonApp.controller('MainCtrl', function ($scope) {
   };
 
   function generateURL(code){
-	  return window.location.href.split('?')[0] + "?b=" + $scope.stateCode
+	return window.location.href.split('#')[0] + "#" + $scope.stateCode
   }
   
   function loadFromURL(url){
-	var arr = url.match(/b=([0-9a-fA-F]+)/)
+	var arr = url.match(/#([0-9a-fA-F]+)/)
 	if(arr) {
 		var code = arr[1];		
 	} else {
@@ -66,7 +66,6 @@ splatoonApp.controller('MainCtrl', function ($scope) {
 	var decoded = decode(code);
 	if(decoded) {
 	//check if all abilities and weapon are valid before loading
-	//FIXME: doesn't allow for less than maxed abilities
 	console.log(decoded[1])
 		for(var i=0; i<decoded[1].length; i++) {
 			if(!$scope.getAbilityById(decoded[1][i]) && decoded[1][i] != 0) {
@@ -234,6 +233,11 @@ splatoonApp.controller('MainCtrl', function ($scope) {
 		
 		$scope.stateCode = encode($scope.selectedWeapon,$scope.mains,$scope.subs)
         $scope.stateURL = generateURL($scope.stateCode)
+		if($scope.stateCode=="") {
+			removeHash()
+		} else {
+			location.hash = '#'+$scope.stateCode
+		}
 	}
 
 	$scope.clear = function() {
@@ -247,6 +251,23 @@ splatoonApp.controller('MainCtrl', function ($scope) {
 	loadFromURL(window.location.href)
 	calc();
 });
+
+function removeHash () { 
+    var scrollV, scrollH, loc = window.location;
+    if ("pushState" in history)
+        history.pushState("", document.title, loc.pathname + loc.search);
+    else {
+        // Prevent scrolling by storing the page's current scroll offset
+        scrollV = document.body.scrollTop;
+        scrollH = document.body.scrollLeft;
+
+        loc.hash = "";
+
+        // Restore the scroll offset, should be flicker free
+        document.body.scrollTop = scrollV;
+        document.body.scrollLeft = scrollH;
+    }
+}
 
 splatoonApp.directive('modal', function () {
     return {
