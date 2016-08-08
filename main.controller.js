@@ -67,8 +67,9 @@ splatoonApp.controller('MainCtrl', function ($scope) {
 	if(decoded) {
 	//check if all abilities and weapon are valid before loading
 	//FIXME: doesn't allow for less than maxed abilities
+	console.log(decoded[1])
 		for(var i=0; i<decoded[1].length; i++) {
-			if(!$scope.getAbilityById(decoded[1][i])) {
+			if(!$scope.getAbilityById(decoded[1][i]) && decoded[1][i] != 0) {
 				console.log("code invalid: invalid ability")
 				return;
 			}
@@ -77,14 +78,21 @@ splatoonApp.controller('MainCtrl', function ($scope) {
 			console.log("code invalid: invalid weapon")
 			return;
 		}
-		for(var i=0; i<decoded[1].length; i++) {
+		for(var i=0; i<3; i++) {
 			if($scope.getAbilityById(decoded[1][i])) {
-				$scope.activate($scope.getAbilityById(decoded[1][i]))
+				$scope.mains.push($scope.getAbilityById(decoded[1][i]));
+				$scope.points+=10;
+			}
+		}
+		for(var i=3; i<decoded[1].length; i++) {
+			if($scope.getAbilityById(decoded[1][i])) {
+				$scope.subs.push($scope.getAbilityById(decoded[1][i]));
+				$scope.points+=3;
 			}
 		}
 		$scope.selectedWeapon = $scope.getWeaponById(decoded[0]);
 		$scope.selectedCategory = $scope.getCategory($scope.selectedWeapon.type);
-
+		calc();
 	} else {
 		return;
 	}
