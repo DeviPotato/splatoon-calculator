@@ -19,12 +19,14 @@ splatoonApp.controller('MainCtrl', function ($scope) {
 	$scope.subs = [];
 	$scope.effectiveDamage = {};
 	$scope.effectiveSubDamage = {};
+	$scope.stateCode = "none";
 	$scope.subweapon = false;
 	$scope.effectiveSpecialDuration = 0;
 	$scope.showModal = false;
 	$scope.ErrorMessage= 'Testing';
 	$scope.selectedCategory = $scope.weapons[0];
 	$scope.selectedWeapon = $scope.selectedCategory.weapons[0];
+	
 	
 	//init stats last
 	angular.module('splatoonApp').stats($scope);
@@ -47,7 +49,52 @@ splatoonApp.controller('MainCtrl', function ($scope) {
         calc();
   };
 
-	$scope.activate = function(ability){
+  $scope.onCodeChange = function(){
+		$scope.stateURL = generateURL($scope.stateCode)
+  };
+
+  function generateURL(code){
+	  return window.location.href.split('?')[0] + "?b=" + $scope.stateCode
+  }
+  
+  function loadFromURL(url){
+	var arr = url.match(/b=([0-9a-fA-F]+)/)
+	if(arr) {
+		var code = arr[1];		
+	} else {
+		console.log("no code to load")
+		return;
+	}
+	var decoded = decode(code);
+	if(decoded) {
+	//check if all abilities and weapon are valid before loading
+	//FIXME: doesn't allow for less than maxed abilities
+		for(var i=0; i<decoded[1].length; i++) {
+			if(!$scope.getAbilityById(decoded[1][i])) {
+				console.log("code invalid: invalid ability")
+				return;
+			}
+		}
+		if(!$scope.getWeaponById(decoded[0])) {
+			console.log("code invalid: invalid weapon")
+			return;
+		}
+		for(var i=0; i<decoded[1].length; i++) {
+			if($scope.getAbilityById(decoded[1][i])) {
+				$scope.activate($scope.getAbilityById(decoded[1][i]))
+			}
+		}
+		$scope.selectedWeapon = $scope.getWeaponById(decoded[0]);
+		$scope.selectedCategory = $scope.getCategory($scope.selectedWeapon.type);
+
+	} else {
+		return;
+	}
+
+  }
+
+  
+  $scope.activate = function(ability){
 
 		/*
 		for(var i = 0; i < $scope.mains.length; i++){
@@ -112,7 +159,6 @@ splatoonApp.controller('MainCtrl', function ($scope) {
 
 	// Calc function for finding values
 	function calc() {
-		console.log("hi")
 
 		//Hide all gear and show what is selected.
 		for(var i = 0; i < $scope.gear.length; i++){
@@ -180,7 +226,8 @@ splatoonApp.controller('MainCtrl', function ($scope) {
 			$scope.effectiveSpecialDuration = special.duration;
 		}
 		
-
+		$scope.stateCode = encode($scope.selectedWeapon,$scope.mains,$scope.subs)
+        $scope.stateURL = generateURL($scope.stateCode)
 	}
 
 	$scope.clear = function() {
@@ -190,6 +237,8 @@ splatoonApp.controller('MainCtrl', function ($scope) {
 		$scope.points = 0;
 		calc();
 	};
+	
+	loadFromURL(window.location.href)
 });
 
 splatoonApp.directive('modal', function () {
