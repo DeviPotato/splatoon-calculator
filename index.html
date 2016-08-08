@@ -88,7 +88,7 @@
 	  <div class="row">
 	 <hr>
       <ul class="col-xs-3" ng-repeat="ability in abilities">
-        <a href="javascript:"><img class="icon" ng-src="{{ability.icon}}" title="{{ability.name}}" ng-click="activate(ability)" ng-class="{'inactive' : points >= 57}"></a>
+        <a href="javascript:"><img class="icon" ng-src="{{ability.icon}}" title="{{ability.name}}" ng-click="activate(ability)" ng-class="{'inactive' : points >= 57 || ability.lockout}"></a>
       </ul>
       </a>
 	  </div>

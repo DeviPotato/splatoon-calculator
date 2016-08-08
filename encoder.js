@@ -19,7 +19,7 @@ function encode(weapon, mains, subs) {
 	if(abilities != "") {
 		hexString += binaryToHex(abilities).result;
 	}
-	return hexString;
+	return hexString.replace(/0+$/g, '');
 };
 
 function hex8(val) {
@@ -35,18 +35,21 @@ function bin5(val) {
 }
 
 function decode(code) {
-	if(code.length==17) {
-		var weaponid = parseInt(code.substring(0,2),16)
-		var rawabilities = hexToBinary(code.substring(2)).result
-		var abilities = [];
-		for (var i = 0; i < rawabilities.length; i += 5) {
-			abilities.push(parseInt(rawabilities.substring(i, i + 5),2));
-		}
-		return [weaponid, abilities];
-	} else {
+	if(code.length>17) {
 		console.log("invalid code")
 		return false;
 	}
+	while(code.length<17) {
+		code=code+='0'
+	}
+
+	var weaponid = parseInt(code.substring(0,2),16)
+	var rawabilities = hexToBinary(code.substring(2)).result
+	var abilities = [];
+	for (var i = 0; i < rawabilities.length; i += 5) {
+		abilities.push(parseInt(rawabilities.substring(i, i + 5),2));
+	}
+	return [weaponid, abilities];
 }
 	
 function binaryToHex(s) {
@@ -112,6 +115,3 @@ function hexToBinary(s) {
     }
     return { valid: true, result: ret };
 }
-
-
-

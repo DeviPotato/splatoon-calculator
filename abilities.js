@@ -79,7 +79,7 @@ angular.module('splatoonApp').abilities = function ($scope) {
 		info : 'Shows location of mines and grenades',
 		icon : 'assets/images/Ability_Bomb_Sniffer.png',
 		stackable: false,
-		slot: 'Clothes',
+		slot: 'Shoes',
 		affects: 'nothing',
 		effects: 'Shows location of mines and grenades'
 	}, {
@@ -101,14 +101,20 @@ angular.module('splatoonApp').abilities = function ($scope) {
 		effects: 'Hides jump location from enemy team',
 		affects: 'nothing',
 	//	negative: true 
-	},  {
-		id : 12,
-		name : 'Special Charge Up',
-		info : 'Special Charge Up',
-		icon : 'assets/images/Ability_Special_Charge_Up.png',
+	}, {
+		id : 20,
+		name : 'Quick Super Jump',
+		info : 'Quick Super Jump',
+		icon : 'assets/images/Ability_Quick_Super_Jump.png',
 		stackable: true,
-		slot: 'Shoes',
-		affects: 'Special Charge'
+		affects: 'Jump Speed'
+	}, {
+		id : 17,
+		name : 'Bomb Range Up',
+		info : 'Bomb Range Up',
+		icon : 'assets/images/Ability_Bomb_Range_Up.png',
+		stackable: true,
+		affects: 'Bomb Throw Range'
 	}, {
 		id : 13,
 		name : 'Ink Saver (Main)',
@@ -124,6 +130,13 @@ angular.module('splatoonApp').abilities = function ($scope) {
 		stackable: true,
 		affects: 'Ink Usage Sub'
 	}, {
+		id : 18,
+		name : 'Ink Recovery Up',
+		info : 'Ink Recovery Up',
+		icon : 'assets/images/Ability_Ink_Recovery_Up.png',
+		stackable: true,
+		affects: 'Ink Recovery'
+	}, {
 		id : 15,
 		name : 'Damage Up',
 		info : 'Damage Up',
@@ -138,34 +151,6 @@ angular.module('splatoonApp').abilities = function ($scope) {
 		stackable: true,
 		affects: 'Damage Taken'
 	}, {
-		id : 17,
-		name : 'Bomb Range Up',
-		info : 'Bomb Range Up',
-		icon : 'assets/images/Ability_Bomb_Range_Up.png',
-		stackable: true,
-		affects: 'Bomb Throw Range'
-	}, {
-		id : 18,
-		name : 'Ink Recovery Up',
-		info : 'Ink Recovery Up',
-		icon : 'assets/images/Ability_Ink_Recovery_Up.png',
-		stackable: true,
-		affects: 'Ink Recovery'
-	}, {
-		id : 19,
-		name : 'Quick Respawn',
-		info : 'Quick Respawn',
-		icon : 'assets/images/Ability_Quick_Respawn.png',
-		stackable: true,
-		affects: 'Respawn Rate'
-	}, {
-		id : 20,
-		name : 'Quick Super Jump',
-		info : 'Quick Super Jump',
-		icon : 'assets/images/Ability_Quick_Super_Jump.png',
-		stackable: true,
-		affects: 'Jump Speed'
-	}, {
 		id : 21,
 		name : 'Run Speed Up',
 		info : 'Run Speed Up',
@@ -173,12 +158,26 @@ angular.module('splatoonApp').abilities = function ($scope) {
 		stackable: true,
 		affects: 'Run Speed'
 	}, {
+		id : 24,
+		name : 'Swim Speed Up',
+		info : 'Swim Speed Up',
+		icon : 'assets/images/Ability_Swim_Speed_Up.png',
+		stackable: true,
+		affects: 'Swim Speed'
+	}, {
 		id : 22,
 		name : 'Special Duration Up',
 		info : 'Special Duration Up',
 		icon : 'assets/images/Ability_Special_Duration_Up.png',
 		stackable: true,
 		affects: 'Special Time'
+	},  {
+		id : 12,
+		name : 'Special Charge Up',
+		info : 'Special Charge Up',
+		icon : 'assets/images/Ability_Special_Charge_Up.png',
+		stackable: true,
+		affects: 'Special Charge'
 	}, {
 		id : 23,
 		name : 'Special Saver',
@@ -187,12 +186,12 @@ angular.module('splatoonApp').abilities = function ($scope) {
 		stackable: true,
 		affects: 'Special Save'
 	}, {
-		id : 24,
-		name : 'Swim Speed Up',
-		info : 'Swim Speed Up',
-		icon : 'assets/images/Ability_Swim_Speed_Up.png',
+		id : 19,
+		name : 'Quick Respawn',
+		info : 'Quick Respawn',
+		icon : 'assets/images/Ability_Quick_Respawn.png',
 		stackable: true,
-		affects: 'Swim Speed'
+		affects: 'Respawn Rate'
 	}];
 	$scope.getAbilityByName = function(name) {
 		for(var i=0; i<$scope.abilities.length; i++) {
@@ -211,6 +210,12 @@ angular.module('splatoonApp').abilities = function ($scope) {
 		return false;
 	}
 	$scope.getAbilitiesBySlot = function(slot) {
-        return $.grep($scope.abilities, function(e){ return e.slot == slot; });
+        var abilities = []
+		for(var i=0; i<$scope.abilities.length; i++) {
+			if($scope.abilities[i].slot==slot) {
+				abilities.push($scope.abilities[i])
+			}
+		}
+		return abilities;
 	}
 };
