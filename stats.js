@@ -98,7 +98,12 @@ angular.module('splatoonApp').stats = function ($scope) {
 	];
 	
 	$scope.getStatByName = function(name) {
-        return $.grep($scope.stats, function(e){ return e.name == name; })[0];
+		for(var i=0; i<$scope.stats.length; i++) {
+			if($scope.stats[i].name==name) {
+				return $scope.stats[i]
+			}
+		}
+		return false;
 	}
 
 };

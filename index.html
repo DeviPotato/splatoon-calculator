@@ -6,20 +6,22 @@
   <title>Splatoon Calculator</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width">
-  <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js'></script>
-  <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js'></script>
-  <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js'></script>
   
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-
+  <script src='libs/jquery-3.1.0/jquery-3.1.0.min.js'></script>
+  <script src='libs/angular-1.5.8/angular.min.js'></script>
+  <script src='libs/bootstrap-3.3.7-dist/js/bootstrap.min.js'></script>
+  
+  <link rel="stylesheet" href="libs/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+  
 <script src='main.controller.js'></script>
-<script src='stats.js'></script>
 <script src='gear.js'></script>
 <script src='abilities.js'></script>
 <script src='weapons.js'></script>
 <script src='subs.js'></script>
 <script src='specials.js'></script>
 <script src='encoder.js'></script>
+<script src='stats.js'></script>
+
 
 
 
@@ -28,15 +30,13 @@
 </head>
 
 
-<body ng-app="splatoonApp" ng-controller="MainCtrl">
+<body ng-app="splatoonApp" ng-controller="MainCtrl" ng-cloak>
 <header class="hero-unit" id="banner">
   <div class="container">
     <!-- <img src="assets/images/squid.png" class="img-responsive" alt="Responsive image" ng-style="{padding:-20, width:800 }"> -->
     <h1>Splatoon Calculator</h1>
   </div>
 </header>
-
-
 
 <div class="container" ng-controller="MainCtrl">
   <modal title="Errorbox" visible="showModal" id="modal">
@@ -74,7 +74,7 @@
       <!-- <h3>Abilities:</h3> -->
 	  <br>
      <!-- <img class="icon" ng-repeat="main in mains track by $index" ng-src="{{main.icon}}" ng-class="imgtble" title="{{main.name}}" ng-hide="{{main.stackable}}"/> -->
-     <span ng-repeat="main in mains track by $index" ng-hide="{{main.stackable}}">{{main.name}} <span class="help" title="{{main.effects}}">?</span><br></span>
+     <span ng-repeat="main in mains track by $index" ng-hide="{{main.stackable}}">{{main.name}} <span class="help" title="{{main.effects}}" >?</span><br></span>
      <p></p> 
 	  </div>
 	  <div class="col-md-6 col-xs-12">
@@ -88,7 +88,7 @@
 	  <div class="row">
 	 <hr>
       <ul class="col-xs-3" ng-repeat="ability in abilities">
-        <a href="javascript:"><img class="icon" ng-src="{{ability.icon}}" title="{{ability.name}}" ng-click="activate(ability)" ng-class="{'inactive' : points >= 57 || ability.lockout}"></a>
+        <a href="javascript:"><img class="icon" ng-src="{{::ability.icon}}" title="{{::ability.name}}" ng-click="activate(ability)" ng-class="{'inactive' : points >= 57 || ability.lockout}"></a>
       </ul>
       </a>
 	  </div>
@@ -100,9 +100,9 @@
 <div class="col-md-6">
   <h2 class="page-header">Stats</h2>
   <a class="col-md-6" ng-repeat="stat in stats">
-  <p>{{stat.name}}</p>
+  <p>{{::stat.name}}</p>
   <div class="progress">
-    <div class="progress-bar" role="progressbar" aria-valuenow="{{stat.value}}" aria-valuemin="{{stat.min}}" aria-valuemax="{{stat.max}}" style="width: {{stat.value/stat.max * 100}}%;">
+    <div class="progress-bar" role="progressbar" aria-valuenow="{{stat.value}}" aria-valuemin="{{stat.min}}" aria-valuemax="{{::stat.max}}" style="width: {{stat.value/stat.max * 100}}%;">
       {{stat.value.toFixed(2)}}{{stat.type}}
     </div>
   </div>
@@ -120,13 +120,13 @@
         <th><h4>Rare</h4></th>
       </tr>
     </thead>
-    <tbody ng-repeat="item in gear" ng-show="item.show">
+    <tbody ng-repeat="item in possibleGear">
       <tr>
         <td><a href="http://splatoonwiki.org/wiki/{{item.uname}}">{{item.name}}</a></td>
         <td><img class="icon" ng-src="assets/images/{{item.uname}}.png" ></td>
-        <td ng-repeat="ability in abilities" ng-show="{{ability.name == item.ability}}"><img class="icon" ng-src="{{ability.icon}}" title="{{ability.name}}"></img></td>
-        <td ng-style="{'background-color':'#77DD77'}"><img class="icon" ng-repeat="abil in abilities" ng-if="item[abil.name] == '1/3.3'" ng-src="{{abil.icon}}" title="{{abil.name}}"></img></td>
-        <td ng-style="{'background-color':'#FF6961'}"><img class="icon" ng-repeat="abil in abilities" ng-if="item[abil.name] == '1/33'" ng-src="{{abil.icon}}" title="{{abil.name}}"></img></td>
+        <td ng-repeat="ability in abilities" ng-show="{{ability.name == item.ability}}"><img class="icon" ng-src="{{::ability.icon}}" title="{{::ability.name}}"></img></td>
+        <td ng-style="{'background-color':'#77DD77'}"><img class="icon" ng-repeat="abil in abilities" ng-if="item[abil.name] == '1/3.3'" ng-src="{{::abil.icon}}" title="{{::abil.name}}"></img></td>
+        <td ng-style="{'background-color':'#FF6961'}"><img class="icon" ng-repeat="abil in abilities" ng-if="item[abil.name] == '1/33'" ng-src="{{::abil.icon}}" title="{{::abil.name}}"></img></td>
       </tr>
     </tbody>
   </table>

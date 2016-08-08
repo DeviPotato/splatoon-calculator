@@ -4,8 +4,9 @@ var splatoonApp = angular.module('splatoonApp', []);
 
 
 splatoonApp.controller('MainCtrl', function ($scope) {
-
 	$scope.mains = [];
+	$scope.subs = [];
+	$scope.possibleGear = [];	
 	
 	//Load in datatables
 	angular.module('splatoonApp').abilities($scope);
@@ -16,7 +17,6 @@ splatoonApp.controller('MainCtrl', function ($scope) {
 
 	//Start main logic
 	$scope.points = 0;
-	$scope.subs = [];
 	$scope.effectiveDamage = {};
 	$scope.effectiveSubDamage = {};
 	$scope.stateCode = "none";
@@ -66,7 +66,6 @@ splatoonApp.controller('MainCtrl', function ($scope) {
 	var decoded = decode(code);
 	if(decoded) {
 	//check if all abilities and weapon are valid before loading
-	console.log(decoded[1])
 		for(var i=0; i<decoded[1].length; i++) {
 			if(!$scope.getAbilityById(decoded[1][i]) && decoded[1][i] != 0) {
 				console.log("code invalid: invalid ability")
@@ -100,6 +99,7 @@ splatoonApp.controller('MainCtrl', function ($scope) {
 			}
 		}
 		calc();
+		updateGear();
 	} else {
 		return;
 	}
@@ -139,8 +139,6 @@ splatoonApp.controller('MainCtrl', function ($scope) {
 			if($scope.abilities[i].stackable || $scope.mains.indexOf(ability) == -1){
 				$scope.mains.push($scope.abilities[i]);
 				$scope.points+=10;
-				console.log($scope.mains.length);
-				console.log($scope.mains[$scope.mains.length-1]);
 				if($scope.abilities[i].slot!=undefined) {
 					console.log("locking out " + $scope.abilities[i].slot)
 					var conflicts = $scope.getAbilitiesBySlot($scope.abilities[i].slot)
@@ -150,6 +148,7 @@ splatoonApp.controller('MainCtrl', function ($scope) {
 					}
 				}
 				calc();
+				updateGear();
 			}
 			else {
 				//alert('Cannot Stack This Ability!!');
@@ -163,6 +162,7 @@ splatoonApp.controller('MainCtrl', function ($scope) {
 			$scope.subs.push($scope.abilities[i]);
 			$scope.points+=3;
 			calc();
+			updateGear();
 		}
 		else {
 			//alert('Cannot Sub This Ability!!');
@@ -181,44 +181,25 @@ splatoonApp.controller('MainCtrl', function ($scope) {
 			}
 		}
 		calc();
+		updateGear();
 	};
 	$scope.desub = function(sub) {
 		$scope.subs.splice($scope.subs.indexOf(sub), 1);
 		$scope.points-=3;
 		calc();
+		updateGear();
 	};
 
 	// Calc function for finding values
 	function calc() {
 
-		//Hide all gear and show what is selected.
+
 		for(var i = 0; i < $scope.gear.length; i++){
 				console.log('hiding gear');
-				$scope.gear[i].show = false;
+				//$scope.gear[i].show = false;
 				$scope.gear[i].uname = $scope.gear[i].name.replace(/ /g,'_');
 			}
-			console.log($scope.gear[0].show);
 
-		for(var i = 0; i < $scope.gear.length; i++){
-				for(var j=0; j < $scope.mains.length; j++){
-
-					if($scope.gear[i].ability === $scope.mains[j].name){
-						console.log('showing ' + $scope.gear[i].name);
-
-						$scope.gear[i].show = true;
-						console.log('showing ' + $scope.gear[i].show);
-
-					}
-					for(var itm in $scope.gear[i]){
-						if(itm === $scope.mains[j].name && $scope.gear[i][itm] === '1/3.3'){
-							console.log('showing ' + $scope.gear[i].name);
-							$scope.gear[i].show = true;
-							console.log('showing ' + $scope.gear[i].show);
-						}
-					}
-				}
-			}
-			
 		for(var i=0; i < $scope.stats.length; i++){
 			var name = $scope.stats[i].name;
 			$scope.stats[i].apply(
@@ -240,7 +221,7 @@ splatoonApp.controller('MainCtrl', function ($scope) {
 			$scope.effectiveDamage[key]=value;
 		}
 		
-		$scope.subweapon = $.grep($scope.subweapons, function(e){ return e.name == $scope.selectedWeapon.sub; })[0];
+		$scope.subweapon = $scope.getSubweaponByName($scope.selectedWeapon.sub);
 		$scope.effectiveSubDamage = {};
 		for(var k in $scope.subweapon.damageValues) $scope.effectiveSubDamage[k]=$scope.subweapon.damageValues[k];
 		for(var key in $scope.effectiveSubDamage) {
@@ -266,6 +247,33 @@ splatoonApp.controller('MainCtrl', function ($scope) {
 		}
 	}
 
+	function updateGear() {
+		//Hide all gear and show what is selected.	
+		$scope.possibleGear = []
+
+		for(var i = 0; i < $scope.gear.length; i++){
+				for(var j=0; j < $scope.mains.length; j++){
+
+					if($scope.gear[i].ability === $scope.mains[j].name && $scope.possibleGear.indexOf($scope.gear[i]) == -1){
+						console.log('showing ' + $scope.gear[i].name);
+
+						$scope.possibleGear.push($scope.gear[i])
+						//$scope.gear[i].show = true;
+
+					}
+					for(var itm in $scope.gear[i]){
+						if(itm === $scope.mains[j].name && $scope.gear[i][itm] === '1/3.3' && $scope.possibleGear.indexOf($scope.gear[i]) == -1){
+							console.log('showing ' + $scope.gear[i].name);
+							//$scope.gear[i].show = true;
+							$scope.possibleGear.push($scope.gear[i])
+							console.log('showing ' + $scope.gear[i].show);
+						}
+					}
+				}
+			}
+	
+	}
+	
 	$scope.clear = function() {
 		console.log('CLEARED');
 		for(var i=0; i<$scope.mains.length; i++) {
@@ -280,10 +288,12 @@ splatoonApp.controller('MainCtrl', function ($scope) {
 		$scope.subs.length=0;
 		$scope.points = 0;
 		calc();
+		updateGear();
 	};
 	//FIXME: move to onload function
 	loadFromURL(window.location.href)
 	calc();
+	updateGear();
 });
 
 function removeHash () { 
