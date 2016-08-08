@@ -91,6 +91,14 @@ splatoonApp.controller('MainCtrl', function ($scope) {
 		}
 		$scope.selectedWeapon = $scope.getWeaponById(decoded[0]);
 		$scope.selectedCategory = $scope.getCategory($scope.selectedWeapon.type);
+		for(var i=0; i<$scope.mains.length; i++) {
+			if($scope.mains[i].slot!=undefined) {
+				var conflicts = $scope.getAbilitiesBySlot($scope.mains[i].slot)
+				for(var e=0; e<conflicts.length; e++) {
+					conflicts[e].lockout = true;
+				}
+			}
+		}
 		calc();
 	} else {
 		return;
@@ -123,13 +131,24 @@ splatoonApp.controller('MainCtrl', function ($scope) {
 
 		var i = $scope.abilities.indexOf(ability);
 		if( $scope.mains.length<3 ){
-
+			if($scope.abilities[i].lockout) {
+				$scope.ErrorMessage = 'Conflicts with equipped ' + $scope.abilities[i].slot + ' ability!';
+				$scope.toggleModal();
+				return;
+			}
 			if($scope.abilities[i].stackable || $scope.mains.indexOf(ability) == -1){
 				$scope.mains.push($scope.abilities[i]);
 				$scope.points+=10;
 				console.log($scope.mains.length);
-
 				console.log($scope.mains[$scope.mains.length-1]);
+				if($scope.abilities[i].slot!=undefined) {
+					console.log("locking out " + $scope.abilities[i].slot)
+					var conflicts = $scope.getAbilitiesBySlot($scope.abilities[i].slot)
+					console.log(conflicts)
+					for(var i=0; i<conflicts.length; i++) {
+						conflicts[i].lockout = true;
+					}
+				}
 				calc();
 			}
 			else {
@@ -154,6 +173,13 @@ splatoonApp.controller('MainCtrl', function ($scope) {
 	$scope.demain = function(main) {
 		$scope.mains.splice($scope.mains.indexOf(main), 1);
 		$scope.points-=10;
+		if(main.slot!=undefined) {
+			console.log("unlocking " + main.slot)
+			var conflicts = $scope.getAbilitiesBySlot(main.slot)
+			for(var i=0; i<conflicts.length; i++) {
+				conflicts[i].lockout = false;
+			}
+		}
 		calc();
 	};
 	$scope.desub = function(sub) {
@@ -242,6 +268,14 @@ splatoonApp.controller('MainCtrl', function ($scope) {
 
 	$scope.clear = function() {
 		console.log('CLEARED');
+		for(var i=0; i<$scope.mains.length; i++) {
+			if($scope.mains[i].slot!=undefined) {
+				var conflicts = $scope.getAbilitiesBySlot($scope.mains[i].slot)
+				for(var e=0; e<conflicts.length; e++) {
+					conflicts[e].lockout = false;
+				}
+			}
+		}
 		$scope.mains.length=0;
 		$scope.subs.length=0;
 		$scope.points = 0;
