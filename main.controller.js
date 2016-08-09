@@ -23,6 +23,7 @@ splatoonApp.controller('MainCtrl', function ($scope) {
 	$scope.subweapon = false;
 	$scope.effectiveSpecialDuration = 0;
 	$scope.showModal = false;
+	$scope.showGear = false;
 	$scope.ErrorMessage= 'Testing';
 	$scope.selectedCategory = $scope.weapons[0];
 	$scope.selectedWeapon = $scope.selectedCategory.weapons[0];
@@ -294,6 +295,10 @@ splatoonApp.controller('MainCtrl', function ($scope) {
 	loadFromURL(window.location.href)
 	calc();
 	updateGear();
+	
+	$scope.toggleGear = function() {
+		$scope.showGear = $scope.showGear ? false: true;
+	}
 });
 
 function removeHash () { 
