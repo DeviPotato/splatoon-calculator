@@ -257,20 +257,16 @@ splatoonApp.controller('MainCtrl', function ($scope) {
 
 					if($scope.gear[i].ability === $scope.mains[j].name && $scope.possibleGear.indexOf($scope.gear[i]) == -1){
 						console.log('showing ' + $scope.gear[i].name);
-
 						$scope.possibleGear.push($scope.gear[i])
-						//$scope.gear[i].show = true;
-
 					}
-					for(var itm in $scope.gear[i]){
-						if(itm === $scope.mains[j].name && $scope.gear[i][itm] === '1/3.3' && $scope.possibleGear.indexOf($scope.gear[i]) == -1){
+
+				}
+				for(var j=0; j < $scope.subs.length; j++){
+					if($scope.gear[i][$scope.subs[j].name] === '1/3.3' && $scope.possibleGear.indexOf($scope.gear[i]) == -1){
 							console.log('showing ' + $scope.gear[i].name);
-							//$scope.gear[i].show = true;
 							$scope.possibleGear.push($scope.gear[i])
-							console.log('showing ' + $scope.gear[i].show);
 						}
 					}
-				}
 			}
 	
 	}
