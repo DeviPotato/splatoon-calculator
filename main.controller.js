@@ -254,7 +254,6 @@ splatoonApp.controller('MainCtrl', function ($scope) {
 
 		for(var i = 0; i < $scope.gear.length; i++){
 				for(var j=0; j < $scope.mains.length; j++){
-
 					if($scope.gear[i].ability === $scope.mains[j].name && $scope.possibleGear.indexOf($scope.gear[i]) == -1){
 						console.log('showing ' + $scope.gear[i].name);
 						$scope.possibleGear.push($scope.gear[i])
@@ -268,7 +267,20 @@ splatoonApp.controller('MainCtrl', function ($scope) {
 						}
 					}
 			}
-	
+		//filter out exclusive items
+		//TODO: refactor this
+		//   would rather do this while building the gear list
+		for(var j = 0; j < $scope.mains.length; j++) {
+			if($scope.mains[j].stackable==false) {
+				for(var i = $scope.possibleGear.length - 1; i >= 0; i--) {
+					if($scope.possibleGear[i].type==$scope.mains[j].slot && $scope.possibleGear[i].ability != $scope.mains[j].name) {
+						console.log("removing " + $scope.possibleGear[i].name)
+						$scope.possibleGear.splice(i,1)
+					}
+				}
+			}
+		}
+		
 	}
 	
 	$scope.clear = function() {
