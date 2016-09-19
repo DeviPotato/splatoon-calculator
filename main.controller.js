@@ -226,6 +226,7 @@ splatoonApp.controller('MainCtrl', function ($scope) {
 			var value = $scope.effectiveDamage[key];
 			value = ((value*$scope.getStatByName("Damage").value)/100).toFixed(1)
 			// splatoon caps main damage values at specific thresholds
+			if(value>24.9 && $scope.selectedWeapon.damageValues[key]<24.9) value = 24.9;
 			if(value>33.3 && $scope.selectedWeapon.damageValues[key]<33.3) value = 33.3;
 			if(value>49.9 && $scope.selectedWeapon.damageValues[key]<49.9) value = 49.9;
 			if(value>99.9 && $scope.selectedWeapon.damageValues[key]<99.9) value = 99.9;
