@@ -1,12 +1,13 @@
 'use strict';
 
-var splatoonApp = angular.module('splatoonApp', []);
+var splatoonApp = angular.module('splatoonApp', ['ui.bootstrap']);
 
 
 splatoonApp.controller('MainCtrl', function ($scope) {
 	$scope.mains = [];
 	$scope.subs = [];
 	$scope.possibleGear = [];	
+	$scope.alerts = [];
 	
 	//Load in datatables
 	angular.module('splatoonApp').abilities($scope);
@@ -37,6 +38,10 @@ splatoonApp.controller('MainCtrl', function ($scope) {
 			weapon.uname = weapon.name.replace(/ /g,'_').replace('.','').replace('\'','');
 		 }
 	 }
+	 
+  $scope.closeAlert = function(index) {
+    $scope.alerts.splice(index, 1);
+  };
   $scope.toggleModal = function(){
         $scope.showModal = !$scope.showModal;
   };
@@ -125,16 +130,18 @@ splatoonApp.controller('MainCtrl', function ($scope) {
 
 		if ($scope.points >= 57) {
 			//alert('Too Many Abilities!!');
-			$scope.ErrorMessage = 'Too Many Abilities!!';
-			$scope.toggleModal();
+/* 			$scope.ErrorMessage = 'Too Many Abilities!!';
+			$scope.toggleModal(); */
+			$scope.alerts.unshift({"msg" : "Too many Abilities!"})
 			return;
 		}
 
 		var i = $scope.abilities.indexOf(ability);
 		if( $scope.mains.length<3 ){
 			if($scope.abilities[i].lockout) {
-				$scope.ErrorMessage = 'Conflicts with equipped ' + $scope.abilities[i].slot + ' ability!';
-				$scope.toggleModal();
+/* 				$scope.ErrorMessage = 'Conflicts with equipped ' + $scope.abilities[i].slot + ' ability!';
+				$scope.toggleModal(); */
+				$scope.alerts.unshift({"msg" : "Conflicts with equipped " + $scope.abilities[i].slot + " ability!"})
 				return;
 			}
 			if($scope.abilities[i].stackable || $scope.mains.indexOf(ability) == -1){
@@ -153,8 +160,9 @@ splatoonApp.controller('MainCtrl', function ($scope) {
 			}
 			else {
 				//alert('Cannot Stack This Ability!!');
-				$scope.ErrorMessage = 'Cannot Stack This Ability!!';
-				$scope.toggleModal();
+/* 				$scope.ErrorMessage = 'Cannot Stack This Ability!!';
+				$scope.toggleModal(); */
+				$scope.alerts.unshift({"msg" : "Cannot stack this ability!"})
 				return;
 			}
 		}
@@ -167,8 +175,10 @@ splatoonApp.controller('MainCtrl', function ($scope) {
 		}
 		else {
 			//alert('Cannot Sub This Ability!!');
-			$scope.ErrorMessage = 'Cannot Sub This Ability!!';
-			$scope.toggleModal();		}
+/* 			$scope.ErrorMessage = 'Cannot Sub This Ability!!';
+			$scope.toggleModal();	 */	
+			$scope.alerts.unshift({"msg" : "Cannot Sub this ability!"})
+			}
 	};
 
 	$scope.demain = function(main) {
@@ -326,45 +336,5 @@ function removeHash () {
     }
 }
 
-splatoonApp.directive('modal', function () {
-    return {
-      template: '<div class="modal fade">' +
-          '<div class="modal-dialog">' +
-            '<div class="modal-content">' +
-              '<div class="modal-header">' +
-                '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' +
-                '<h4 class="modal-title">{{ ErrorMessage }}</h4>' +
-								'</div>' +
-								'<div class="modal-body">' +
-									'<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>' +
-									'</div>' +
-								'</div>' +
-	            '</div>' +
-	          '</div>' +
-	        '</div>',
-      restrict: 'E',
-      transclude: true,
-      replace:true,
-      scope:true,
-      link: function postLink(scope, element, attrs) {
-        scope.$watch(attrs.visible, function(value){
-          if(value == true)
-            $(element).modal('show');
-          else
-            $(element).modal('hide');
-        });
-
-        $(element).on('shown.bs.modal', function(){
-          scope.$apply(function(){
-            scope.$parent[attrs.visible] = true;
-          });
-        });
-
-        $(element).on('hidden.bs.modal', function(){
-          scope.$apply(function(){
-            scope.$parent[attrs.visible] = false;
-          });
-        });
-      }
-    };
-});
+ 
+ 

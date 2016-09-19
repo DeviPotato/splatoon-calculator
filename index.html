@@ -7,11 +7,14 @@
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width">
   
+  <link rel="stylesheet" href="libs/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+  
+  
   <script src='libs/jquery-3.1.0/jquery-3.1.0.min.js'></script>
   <script src='libs/angular-1.5.8/angular.min.js'></script>
-  <script src='libs/bootstrap-3.3.7-dist/js/bootstrap.min.js'></script>
-  
-  <link rel="stylesheet" href="libs/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+  <script src='libs/ui-bootstrap-2.1.3/ui-bootstrap-tpls-2.1.3.min.js'></script>
+<!--   <script src='libs/bootstrap-3.3.7-dist/js/bootstrap.min.js'></script> -->
+<!--   <script src='libs/less-2.7.1/less.min.js'></script> -->
   
 <script src='main.controller.js'></script>
 <script src='gear.js'></script>
@@ -31,6 +34,9 @@
 
 
 <body ng-app="splatoonApp" ng-controller="MainCtrl" ng-cloak>
+    <script type="text/ng-template" id="alert.html">
+    <div ng-transclude></div>
+  </script>
 <header class="hero-unit" id="banner">
   <div class="container">
     <!-- <img src="assets/images/squid.png" class="img-responsive" alt="Responsive image" ng-style="{padding:-20, width:800 }"> -->
@@ -38,10 +44,8 @@
   </div>
 </header>
 
-<div class="container" ng-controller="MainCtrl">
-  <modal title="Errorbox" visible="showModal" id="modal">
-  </modal>
 
+<div class="container" ng-controller="MainCtrl">
 <div class="col-md-12">
   <input type="text" class="form-control" ng-model="stateURL" ng-change="onCodeChange()"></input>
 </div>
@@ -68,19 +72,19 @@
      <div class="col-md-6 col-xs-12">
       <h2 >Mains:</h2>
       <a href="javascript:">
-      <img class="icon" ng-repeat="main in mains track by $index" ng-src="{{main.icon}}" ng-class="imgtble" title="{{main.name}}"
+      <img class="icon" ng-repeat="main in mains track by $index" ng-src="{{main.icon}}" ng-class="imgtble" uib-tooltip="{{main.name}}"
       ng-click="demain(main)" />
       </a>
       <!-- <h3>Abilities:</h3> -->
 	  <br>
      <!-- <img class="icon" ng-repeat="main in mains track by $index" ng-src="{{main.icon}}" ng-class="imgtble" title="{{main.name}}" ng-hide="{{main.stackable}}"/> -->
-     <span ng-repeat="main in mains track by $index" ng-hide="{{main.stackable}}">{{main.name}} <span class="help" title="{{main.effects}}" >?</span><br></span>
+     <span ng-repeat="main in mains track by $index" ng-hide="{{main.stackable}}">{{main.name}} <span class="help" uib-tooltip="{{main.effects}}" >?</span><br></span>
      <p></p> 
 	  </div>
 	  <div class="col-md-6 col-xs-12">
       <h2 >Subs:</h2>
       <a href="javascript:">
-      <img class="icon small" ng-repeat="sub in subs track by $index" ng-src="{{sub.icon}}" ng-class="imgtble" title="{{sub.name}}" ng-click="desub(sub)"/>
+      <img class="icon small" ng-repeat="sub in subs track by $index" ng-src="{{sub.icon}}" ng-class="imgtble" uib-tooltip="{{sub.name}}" ng-click="desub(sub)"/>
       </a>
 	  </div>
 	  </div>
@@ -88,7 +92,7 @@
 	  <div class="row">
 	 <hr>
       <ul class="col-xs-3" ng-repeat="ability in abilities">
-        <a href="javascript:"><img class="icon" ng-src="{{::ability.icon}}" title="{{::ability.name}}" ng-click="activate(ability)" ng-class="{'inactive' : points >= 57 || ability.lockout}"></a>
+        <a href="javascript:"><img class="icon" ng-src="{{::ability.icon}}" uib-tooltip="{{::ability.name}}" ng-click="activate(ability)" ng-class="{'inactive' : points >= 57 || ability.lockout}"></a>
       </ul>
       </a>
 	  </div>
@@ -137,21 +141,10 @@
   </div>
   </div>
 </div>
+  <div style="position:fixed; bottom: 0; z-index:100" class="container">
+  <div uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'danger')" close="closeAlert($index)" dismiss-on-timeout=2000>{{alert.msg}}</div>
+  </div> 
 </div>
-
-
-
-
-<!-- <div class="container">
-<div class="container">
-     <h3>Headgear:</h3>
-     <a  href="http://splatoonwiki.org/wiki/{{item.uname}}" ng-repeat="item in gear" ng-show="item.show && item.type == 'Headgear'">{{item.name}} ({{item.ability}}), </a>
-     <h3>Clothes:</h3>
-     <a href="http://splatoonwiki.org/wiki/{{item.uname}}" ng-repeat="item in gear" ng-show="item.show && item.type == 'Clothes'">{{item.name}} ({{item.ability}}), </a>
-        <h3>Shoes:</h3>
-     <a href="http://splatoonwiki.org/wiki/{{item.uname}}" ng-repeat="item in gear" ng-show="item.show && item.type == 'Shoes'" >{{item.name}} ({{item.ability}}), </a>
-</div>
-</div> -->
 
 <footer class="footer">
   <div class="container">

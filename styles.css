@@ -32,7 +32,8 @@ h2 {
     color: #F5F5F5;
     text-align: center;
     text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
-    background: #4393B9;
+    background: #4393B9; 
+    background-image: url('assets/images/ui/backdrop.png');    
 }
 
 .footer {
@@ -108,3 +109,4 @@ img.icon.small {
     color: #000;
     padding: 0.2em 0;
 }
+
