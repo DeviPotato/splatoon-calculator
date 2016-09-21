@@ -289,7 +289,7 @@ splatoonApp.controller('MainCtrl', function ($scope) {
 		$scope.effectiveDamage = {};
 		for(var k in $scope.selectedWeapon.damageValues) $scope.effectiveDamage[k]=$scope.selectedWeapon.damageValues[k];
 		for(var key in $scope.effectiveDamage) {
-			var value = $scope.effectiveDamage[key];
+			var value = $scope.effectiveDamage[key].toFixed(2);
 			var equippedDefense = $scope.possibleEquipped[$scope.defSlider.value];
 			var equippedDefenseTotal = equippedDefense.mains*10 + equippedDefense.subs*3;
 			var defValue = ((0.99 * equippedDefenseTotal) - (0.09 * equippedDefenseTotal)*(0.09 * equippedDefenseTotal))/100
@@ -313,7 +313,7 @@ splatoonApp.controller('MainCtrl', function ($scope) {
 		$scope.effectiveSubDamage = {};
 		for(var k in $scope.subweapon.damageValues) $scope.effectiveSubDamage[k]=$scope.subweapon.damageValues[k];
 		for(var key in $scope.effectiveSubDamage) {
-			var value = $scope.effectiveSubDamage[key];
+			var value = $scope.effectiveSubDamage[key].toFixed(2);
 			var equippedDefense = $scope.possibleEquipped[$scope.defSlider.value];
 			var equippedDefenseTotal = equippedDefense.mains*10 + equippedDefense.subs*3;
 			var defValue = ((0.99 * equippedDefenseTotal) - (0.09 * equippedDefenseTotal)*(0.09 * equippedDefenseTotal))/100
