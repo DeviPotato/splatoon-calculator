@@ -50,6 +50,11 @@ img.icon.small {
    width:50px;
    padding:5px;
 }
+img.icon.tiny {
+   width:30px;
+   padding:2px;
+}
+
 .imgtble {
     padding:0px;
     width:50px;
@@ -70,7 +75,7 @@ img.icon.small {
 }
 
 .weapon {
-	height: 100px;
+	height: 125px;
 	margin:10px;
 }
 
@@ -78,8 +83,17 @@ img.icon.small {
 	height: 190px;
 }
 
+
 .highlight {
+	font-weight: bold;
+}
+
+.highlight.up {
 	color: green;
+}
+
+.highlight.down {
+	color: red;
 }
 
 .help {
@@ -110,3 +124,24 @@ img.icon.small {
     padding: 0.2em 0;
 }
 
+.defcontainer {
+	height: 50px;
+    text-align: center;  /* align the inline(-block) elements horizontally */
+    font: 0/0 a;         /* remove the gap between inline(-block) elements */
+}
+
+.defcontainer:before {    /* create a full-height inline block pseudo=element */
+    content: ' ';
+    display: inline-block;
+    vertical-align: middle;  /* vertical alignment of the inline element */
+    height: 100%;
+}
+
+.deficon {
+    display: inline-block;
+    vertical-align: middle;  /* vertical alignment of the inline element */
+}
+
+.rzslider {
+	margin:10px 0 15px 0
+}

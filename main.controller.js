@@ -1,6 +1,6 @@
 'use strict';
 
-var splatoonApp = angular.module('splatoonApp', ['ui.bootstrap']);
+var splatoonApp = angular.module('splatoonApp', ['ui.bootstrap', 'rzModule']);
 
 
 splatoonApp.controller('MainCtrl', function ($scope) {
@@ -36,6 +36,70 @@ splatoonApp.controller('MainCtrl', function ($scope) {
 	for(let category of $scope.weapons){
 		for(let weapon of category.weapons){
 			weapon.uname = weapon.name.replace(/ /g,'_').replace('.','').replace('\'','');
+		 }
+	 }
+	 
+   $scope.possibleEquipped = [
+   				{ mains : 0, subs : 0},
+				{ mains : 0, subs : 1},
+				{ mains : 0, subs : 2},
+				{ mains : 0, subs : 3},
+				{ mains : 1, subs : 0},
+				{ mains : 0, subs : 4},
+				{ mains : 1, subs : 1},
+				{ mains : 0, subs : 5},
+				{ mains : 1, subs : 2},
+				{ mains : 0, subs : 6},
+				{ mains : 1, subs : 3},
+				{ mains : 2, subs : 0},
+				{ mains : 0, subs : 7},
+				{ mains : 1, subs : 4},
+				{ mains : 2, subs : 1},
+				{ mains : 0, subs : 8},
+				{ mains : 1, subs : 5},
+				{ mains : 2, subs : 2},
+				{ mains : 0, subs : 9},
+				{ mains : 1, subs : 6},
+				{ mains : 2, subs : 3},
+				{ mains : 3, subs : 0},
+				{ mains : 1, subs : 7},
+				{ mains : 2, subs : 4},
+				{ mains : 3, subs : 1},
+				{ mains : 1, subs : 8},
+				{ mains : 2, subs : 5},
+				{ mains : 3, subs : 2},
+				{ mains : 1, subs : 9},
+				{ mains : 2, subs : 6},
+				{ mains : 3, subs : 3},
+				{ mains : 2, subs : 6},
+				{ mains : 3, subs : 3},
+				{ mains : 2, subs : 7},
+				{ mains : 3, subs : 4},
+				{ mains : 2, subs : 8},
+				{ mains : 3, subs : 5},
+				{ mains : 2, subs : 9},
+				{ mains : 3, subs : 6},
+				{ mains : 3, subs : 7},
+				{ mains : 3, subs : 8},
+				{ mains : 3, subs : 9}
+   ]
+   
+	$scope.getNumber = function(num) {
+		return new Array(num);   
+	}
+	// slider for damage preview vs defense
+	// translate index of this to possibleEquipped array values to get the mains/subs
+	 $scope.defSlider = {
+		 value: 0,
+		 options: {
+			 floor: 0,
+			 ceil: 41,
+			 showTicks : true,
+			 hideLimitLabels : true,
+			 hidePointerLabels : true,
+			 onChange : function() {
+				 calc();
+			 }
 		 }
 	 }
 	 
@@ -220,11 +284,23 @@ splatoonApp.controller('MainCtrl', function ($scope) {
 		}
 		
 		//TODO: refactor this
+		//TODO: really, refactor this, it's a mess
+		//move this stuff into its own function or something
 		$scope.effectiveDamage = {};
 		for(var k in $scope.selectedWeapon.damageValues) $scope.effectiveDamage[k]=$scope.selectedWeapon.damageValues[k];
 		for(var key in $scope.effectiveDamage) {
 			var value = $scope.effectiveDamage[key];
-			value = ((value*$scope.getStatByName("Damage").value)/100).toFixed(1)
+			var equippedDefense = $scope.possibleEquipped[$scope.defSlider.value];
+			var equippedDefenseTotal = equippedDefense.mains*10 + equippedDefense.subs*3;
+			var defValue = ((0.99 * equippedDefenseTotal) - (0.09 * equippedDefenseTotal)*(0.09 * equippedDefenseTotal))/100
+			var damValue = ($scope.getStatByName("Damage").value)/100 - 1
+			console.log(defValue)
+			if(damValue > defValue) {
+				value = (value * (1 + (damValue - defValue))).toFixed(2)
+			}
+			else if(damValue < defValue) {
+				value = (value * (1 + (damValue - defValue)/1.8)).toFixed(2)
+			}
 			// splatoon caps main damage values at specific thresholds
 			if(value>24.9 && $scope.selectedWeapon.damageValues[key]<24.9) value = 24.9;
 			if(value>33.3 && $scope.selectedWeapon.damageValues[key]<33.3) value = 33.3;
@@ -232,13 +308,23 @@ splatoonApp.controller('MainCtrl', function ($scope) {
 			if(value>99.9 && $scope.selectedWeapon.damageValues[key]<99.9) value = 99.9;
 			$scope.effectiveDamage[key]=value;
 		}
-		
+		//TODO: refactor this too
 		$scope.subweapon = $scope.getSubweaponByName($scope.selectedWeapon.sub);
 		$scope.effectiveSubDamage = {};
 		for(var k in $scope.subweapon.damageValues) $scope.effectiveSubDamage[k]=$scope.subweapon.damageValues[k];
 		for(var key in $scope.effectiveSubDamage) {
 			var value = $scope.effectiveSubDamage[key];
-			value = ((value*$scope.getStatByName("Damage").value)/100).toFixed(1)
+			var equippedDefense = $scope.possibleEquipped[$scope.defSlider.value];
+			var equippedDefenseTotal = equippedDefense.mains*10 + equippedDefense.subs*3;
+			var defValue = ((0.99 * equippedDefenseTotal) - (0.09 * equippedDefenseTotal)*(0.09 * equippedDefenseTotal))/100
+			var damValue = ($scope.getStatByName("Damage").value)/100 - 1
+			console.log(defValue)
+			if(damValue > defValue) {
+				value = (value * (1 + (damValue - defValue))).toFixed(2)
+			}
+			else if(damValue < defValue) {
+				value = (value * (1 + (damValue - defValue)/1.8)).toFixed(2)
+			}
 			$scope.effectiveSubDamage[key]=value;
 		}
 		
