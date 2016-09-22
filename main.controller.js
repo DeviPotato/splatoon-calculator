@@ -3,6 +3,8 @@
 var splatoonApp = angular.module('splatoonApp', ['ui.bootstrap', 'rzModule']);
 
 
+ 
+
 splatoonApp.controller('MainCtrl', function ($scope) {
 	$scope.mains = [];
 	$scope.subs = [];
@@ -32,6 +34,18 @@ splatoonApp.controller('MainCtrl', function ($scope) {
 	
 	//init stats last
 	angular.module('splatoonApp').stats($scope);
+	
+	//configure uib-tooltip to hide tooltip on touch devices
+	 splatoonApp.config(['$uibTooltipProvider', function ($uibTooltipProvider) {
+		 var parser = new UAParser();
+		 var result = parser.getResult();
+		 var touch = result.device && (result.device.type === 'tablet' || result.device.type === 'mobile');
+		 if ( touch ){
+			 $uibTooltipProvider.options({trigger: 'dontTrigger'});
+		 } else {
+			 $uibTooltipProvider.options({trigger: 'mouseenter'});
+		}
+	}]);
 	
 	for(let category of $scope.weapons){
 		for(let weapon of category.weapons){
@@ -404,6 +418,7 @@ splatoonApp.controller('MainCtrl', function ($scope) {
 	$scope.toggleGear = function() {
 		$scope.showGear = $scope.showGear ? false: true;
 	}
+	
 });
 
 function removeHash () { 
@@ -422,6 +437,3 @@ function removeHash () {
         document.body.scrollLeft = scrollH;
     }
 }
-
- 
- 
