@@ -91,7 +91,7 @@
 	  </div>
 	  </div>
 	 <hr>
-      <ul class="col-xs-3" ng-repeat="ability in abilities">
+      <ul class="col-xs-3" ng-repeat="ability in abilities" style="z-index: 90">
         <a href="javascript:"><img class="icon" ng-src="{{::ability.icon}}" uib-tooltip="{{::ability.name}}" ng-click="activate(ability)" ng-class="{'inactive' : points >= 57 || ability.lockout}"></a>
       </ul>
 
