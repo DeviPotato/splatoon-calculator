@@ -117,21 +117,12 @@ img.icon.tiny {
 
 .defcontainer {
 	height: 50px;
-    text-align: center;  /* align the inline(-block) elements horizontally */
-    font: 0/0 a;         /* remove the gap between inline(-block) elements */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.defcontainer:before {    /* create a full-height inline block pseudo=element */
-    content: ' ';
-    display: inline-block;
-    vertical-align: middle;  /* vertical alignment of the inline element */
-    height: 100%;
-}
 
-.deficon {
-    display: inline-block;
-    vertical-align: middle;  /* vertical alignment of the inline element */
-}
 
 .rzslider {
 	margin:10px 0 15px 0

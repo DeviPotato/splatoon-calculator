@@ -53,8 +53,10 @@
                 </div>
             </div>
             <div class="col-md-12 defcontainer">
-               <img class="icon small deficon" style="top: 0; left: 0; right: 0; bottom: 0; margin: auto" ng-repeat="i in getNumber(possibleEquipped[defSlider.value].mains) track by $index" src="assets/images/Ability_Defense_Up.png" />
-               <img class="icon tiny deficon" style="top: 0; left: 0; right: 0; bottom: 0; margin: auto"  ng-repeat="i in getNumber(possibleEquipped[defSlider.value].subs) track by $index" src="assets/images/Ability_Defense_Up.png" />
+               <div>
+                <img class="icon small deficon" style="top: 0; left: 0; right: 0; bottom: 0; margin: auto" ng-repeat="i in getNumber(possibleEquipped[defSlider.value].mains) track by $index" src="assets/images/Ability_Defense_Up.png" />
+                <img class="icon tiny deficon" style="top: 0; left: 0; right: 0; bottom: 0; margin: auto"  ng-repeat="i in getNumber(possibleEquipped[defSlider.value].subs) track by $index" src="assets/images/Ability_Defense_Up.png" />
+               </div>
             </div>
             <div class="col-md-12" style="text-align: center">
                <rzslider rz-slider-model="defSlider.value" rz-slider-options="defSlider.options"></rzslider>
