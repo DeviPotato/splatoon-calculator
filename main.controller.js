@@ -3,8 +3,6 @@
 var splatoonApp = angular.module('splatoonApp', ['ui.bootstrap', 'rzModule']);
 
 
-
-
 splatoonApp.controller('MainCtrl', function($scope) {
     $scope.mains = [];
     $scope.subs = [];
@@ -349,6 +347,13 @@ splatoonApp.controller('MainCtrl', function($scope) {
         } else {
             location.hash = '#' + $scope.stateCode
         }
+    }
+
+    $scope.isMoreHitsToSplat = function(baseDmg,effectiveDmg) {
+      var baseHits = Math.floor(100/baseDmg);
+      var effectiveHits = Math.floor(100/effectiveDmg);
+      if(baseHits < effectiveHits) return true;
+      else return false;
     }
 
     function updateGear() {

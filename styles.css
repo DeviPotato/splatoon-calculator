@@ -1,5 +1,5 @@
 body {
-    background-image: url('assets/images/ui/backdrop.png');  
+    background-image: url('assets/images/ui/backdrop.png');
 }
 .h1 {
   text-align: center;
@@ -31,8 +31,8 @@ h2 {
     color: #F5F5F5;
     text-align: center;
     text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
-    background: #28a5e7; 
-    background-image: url('assets/images/ui/splat-bg.png');    
+    background: #28a5e7;
+    background-image: url('assets/images/ui/splat-bg.png');
 }
 
 .footer {
@@ -61,19 +61,6 @@ img.icon.tiny {
     height:50px;
 }
 
-.red {
-    background: #FF6961;
-}
-.lblue {
-    background: #67A8C6;
-}
-.blue {
-    background: #4393B9;
-}
-.green {
-    background: #77DD77;
-}
-
 .weapon {
 	height: 125px;
 	margin:10px;
@@ -88,12 +75,16 @@ img.icon.tiny {
 	font-weight: bold;
 }
 
-.highlight.up {
+.highlight.green {
 	color: green;
 }
 
-.highlight.down {
+.highlight.red {
 	color: red;
+}
+
+.highlight.yellow {
+	color: orange;
 }
 
 .help {
