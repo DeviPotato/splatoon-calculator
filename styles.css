@@ -55,6 +55,17 @@ img.icon.tiny {
    padding:2px;
 }
 
+img.smalldef {
+   width:10%;
+   max-width:50px;
+   padding:2px;
+}
+img.tinydef {
+   width:7%;
+   max-width:33px;
+   padding:2px;
+}
+
 .imgtble {
     padding:0px;
     width:50px;
