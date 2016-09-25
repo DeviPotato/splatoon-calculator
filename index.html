@@ -1,160 +1,147 @@
 <!doctype html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Splatoon Calculator</title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width">
-  
-  <link rel="stylesheet" href="libs/bootstrap-3.3.7-dist/css/bootstrap.css"/>
-  <link rel="stylesheet" type="text/css" href="libs/rzslider-5.5.0/rzslider.min.css"/>
-  
-  <script src='libs/jquery-3.1.0/jquery-3.1.0.min.js'></script>
-  <script src='libs/angular-1.5.8/angular.min.js'></script>
-  <script src='libs/ui-bootstrap-2.1.3/ui-bootstrap-tpls-2.1.3.min.js'></script>
-  <script src='libs/rzslider-5.5.0/rzslider.min.js'></script>
-  
-<script src='main.controller.js'></script>
-<script src='gear.js'></script>
-<script src='abilities.js'></script>
-<script src='weapons.js'></script>
-<script src='subs.js'></script>
-<script src='specials.js'></script>
-<script src='encoder.js'></script>
-<script src='stats.js'></script>
-
-
-
-
-
-<link  href="styles.css" rel="stylesheet">
-</head>
-
-
-<body ng-app="splatoonApp" ng-controller="MainCtrl" ng-cloak>
-    <script type="text/ng-template" id="alert.html">
-    <div ng-transclude></div>
-  </script>
-<header class="hero-unit" id="banner" style="height:200px">
-    <img src="assets/images/ui/logo.png" style="height:100%; width:auto" alt="Splatoon Calculator"> 
-</header>
-
-
-<div class="container" style="background:#FFF; border-radius: 0px 0px 20px 20px">
-<div class="col-md-12">
-  <input type="text" class="form-control" ng-model="stateURL" ng-change="onCodeChange()"></input>
-</div>
-<div class="col-md-6">
-  <h2 class="page-header">Weapon</h2>
-  <div class="row">
-  <div class="col-md-6"><select class="form-control btn btn-primary dropdown-toggle" data-ng-model="selectedCategory" data-ng-options="x.type for x in weapons" data-ng-change="onCategoryChange()"></select></div>
-  <div class="col-md-6"><select class="form-control btn btn-primary dropdown-toggle" data-ng-model="selectedWeapon" data-ng-options="x.name for x in selectedCategory.weapons" data-ng-change="onWeaponChange()"></select></div>
-  </div>
-  <div class="weapon">
-  <div class="row">
-  <div class="col-md-2 col-sm-2"><img src="assets/images/weapons/{{selectedWeapon.uname}}.png"></div>
-  <div class="col-md-5 col-sm-5 col-xs-12"><span ng-repeat="(key, value) in effectiveDamage"><b>{{key}}</b>: <span ng-class="{'highlight up' : effectiveDamage[key]>selectedWeapon.damageValues[key], 'highlight down' : effectiveDamage[key]<selectedWeapon.damageValues[key]}">{{value}}</span><br></span></div>
-  <div class="col-md-5 col-sm-5 col-xs-12"><b>Subweapon:</b> {{selectedWeapon.sub}}<br>
-  <span ng-repeat="(key, value) in effectiveSubDamage" style="margin-left:10px; font-size: 9pt"><b>{{key}}</b>: <span ng-class="{'highlight up' : effectiveSubDamage[key]>subweapon.damageValues[key], 'highlight down' : effectiveSubDamage[key]<subweapon.damageValues[key]}">{{value}}</span><br></span>
-  <b>Special:</b> {{selectedWeapon.special}}<br>
-  <span  style="margin-left:10px; font-size: 9pt"><b>Duration:</b> {{effectiveSpecialDuration.toFixed(2)}}s</div>
-  </div>
-  </div>
-  <div class="col-md-12 defcontainer">
-  <img class="icon small deficon" style="top: 0; left: 0; right: 0; bottom: 0; margin: auto" ng-repeat="i in getNumber(possibleEquipped[defSlider.value].mains) track by $index" src="assets/images/Ability_Defense_Up.png" />
-  <img class="icon tiny deficon" style="top: 0; left: 0; right: 0; bottom: 0; margin: auto"  ng-repeat="i in getNumber(possibleEquipped[defSlider.value].subs) track by $index" src="assets/images/Ability_Defense_Up.png" />
-  </div>
-  <div class="col-md-12" style="text-align: center">
-  <rzslider rz-slider-model="defSlider.value" rz-slider-options="defSlider.options"></rzslider>
-  Target Defense
-  </div>
-  <h2 class="page-header">Abilities 
-      <button type="button" class="btn btn-default btn-lg" ng-click="clear()">RESET</button></h2>
-     <div class="row">
-	 <div class="abilitylist">
-     <div class="col-md-6 col-xs-12">
-      <h2 >Mains:</h2>
-      <a href="javascript:"><img class="icon" ng-repeat="main in mains track by $index" ng-src="{{main.icon}}" ng-class="imgtble" uib-tooltip="{{main.name}}" ng-click="demain(main)" /></a>
-      <!-- <h3>Abilities:</h3> -->
-	  <br>
-     <!-- <img class="icon" ng-repeat="main in mains track by $index" ng-src="{{main.icon}}" ng-class="imgtble" title="{{main.name}}" ng-hide="{{main.stackable}}"/> -->
-     <span ng-repeat="main in mains track by $index" ng-hide="{{main.stackable}}">{{main.name}} <span class="help" uib-tooltip="{{main.effects}}" >?</span><br></span>
-     <p></p> 
-	  </div>
-	  <div class="col-md-6 col-xs-12">
-      <h2 >Subs:</h2>
-      <a href="javascript:">
-      <img class="icon small" ng-repeat="sub in subs track by $index" ng-src="{{sub.icon}}" ng-class="imgtble" uib-tooltip="{{sub.name}}" ng-click="desub(sub)"/>
-      </a>
-	  </div>
-	  </div>
-	  </div>
-	 <hr>
-      <ul class="col-xs-3" ng-repeat="ability in abilities" style="z-index: 90">
-        <a href="javascript:"><img class="icon" ng-src="{{::ability.icon}}" uib-tooltip="{{::ability.name}}" ng-click="activate(ability)" ng-class="{'inactive' : points >= 57 || ability.lockout}"></a>
-      </ul>
-
-</div>
-
-
-
-<div class="col-md-6">
-  <h2 class="page-header">Stats</h2>
-  <div class="col-md-6" ng-repeat="stat in stats">
-  <p>{{::stat.name}}</p>
-  <div class="progress">
-    <div class="progress-bar" role="progressbar" aria-valuenow="{{stat.value}}" aria-valuemin="{{stat.min}}" aria-valuemax="{{::stat.max}}" style="width: {{stat.value/stat.max * 100}}%;">
-      {{stat.value.toFixed(2)}}{{stat.type}}
-    </div>
-  </div>
-  </div>
-  <h2 class="page-header">Possible Gear 
-  <button type="button" class="btn btn-default btn-lg" ng-if="!showGear" ng-click="toggleGear()">Show</button>
-  <button type="button" class="btn btn-default btn-lg" ng-if="showGear" ng-click="toggleGear()">Hide</button>
-  </h2>
-  <div ng-if = "showGear">
-  <p>Common: 1/3.3 | Rare: 1/33 | Flat: 1/13</p>
-  <div class="table-responsive">
-  <table class="table table-bordered">
-    <thead>
-      <tr>
-        <th><h4>Name</h4></th>
-        <th><h4>Image</h4></th>
-        <th><h4>Ability</h4></th>
-        <th><h4>Comn</h4></th>
-        <th><h4>Rare</h4></th>
-      </tr>
-    </thead>
-    <tbody ng-repeat="item in possibleGear">
-      <tr>
-        <td><a href="http://splatoonwiki.org/wiki/{{item.uname}}">{{item.name}}</a></td>
-        <td><img class="icon" ng-src="assets/images/{{item.uname}}.png" ></td>
-        <td ng-repeat="ability in abilities" ng-show="{{ability.name == item.ability}}"><img class="icon" ng-src="{{::ability.icon}}" title="{{::ability.name}}"></img></td>
-        <td ng-style="{'background-color':'#77DD77'}"><img class="icon" ng-repeat="abil in abilities" ng-if="item[abil.name] == '1/3.3'" ng-src="{{::abil.icon}}" title="{{::abil.name}}"></img></td>
-        <td ng-style="{'background-color':'#FF6961'}"><img class="icon" ng-repeat="abil in abilities" ng-if="item[abil.name] == '1/33'" ng-src="{{::abil.icon}}" title="{{::abil.name}}"></img></td>
-      </tr>
-    </tbody>
-  </table>
-  </div>
-  </div>
-</div>
-
-</div>
-
-  <div style="position:fixed; bottom: 0; z-index:100; left: 50%; transform: translateX(-50%);" class="container">
-  <div uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'danger')" close="closeAlert($index)" dismiss-on-timeout=2000>{{alert.msg}}</div>
-  </div> 
-  
-<footer class="footer">
-  <div class="container">
-      <p>Calculator for splatoon built with <a href="https://angularjs.org/
-">AngularJS</a> |
-         <a href="https://docs.google.com/spreadsheets/d/1mE97vf8FxdfvR6pt7tFvYXkYGSZGg4AsrTI_2veUlbs">Roll Information</a> |
-         <a href="http://wikiwiki.jp/splatoon2ch/?%A5%AE%A5%A2%A5%D1%A5%EF%A1%BC%B8%A1%BE%DA">Ability Information</a> |
-         <a href="http://splatoonwiki.org/wiki/">Inkipedia</a>
-          | <a href="https://github.com/DeviPotato/splatoon-calculator">GitHub</a>
-         </p>
-  </div>
-</footer>
+   <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <title>Splatoon Calculator</title>
+      <meta name="description" content="">
+      <meta name="viewport" content="width=device-width">
+      <link rel="stylesheet" href="libs/bootstrap-3.3.7-dist/css/bootstrap.css"/>
+      <link rel="stylesheet" type="text/css" href="libs/rzslider-5.5.0/rzslider.min.css"/>
+      <script src='libs/jquery-3.1.0/jquery-3.1.0.min.js'></script>
+      <script src='libs/angular-1.5.8/angular.min.js'></script>
+      <script src='libs/ui-bootstrap-2.1.3/ui-bootstrap-tpls-2.1.3.min.js'></script>
+      <script src='libs/rzslider-5.5.0/rzslider.min.js'></script>
+      <script src='main.controller.js'></script>
+      <script src='gear.js'></script>
+      <script src='abilities.js'></script>
+      <script src='weapons.js'></script>
+      <script src='subs.js'></script>
+      <script src='specials.js'></script>
+      <script src='encoder.js'></script>
+      <script src='stats.js'></script>
+      <link  href="styles.css" rel="stylesheet">
+   </head>
+   <body ng-app="splatoonApp" ng-controller="MainCtrl" ng-cloak>
+      <script type="text/ng-template" id="alert.html">
+         <div ng-transclude></div>
+      </script>
+      <header class="hero-unit" id="banner" style="height:200px">
+         <img src="assets/images/ui/logo.png" style="height:100%; width:auto" alt="Splatoon Calculator">
+      </header>
+      <div class="container" style="background:#FFF; border-radius: 0px 0px 20px 20px">
+         <div class="col-md-12">
+            <input type="text" class="form-control" ng-model="stateURL" ng-change="onCodeChange()"></input>
+         </div>
+         <div class="col-md-6">
+            <h2 class="page-header">Weapon</h2>
+            <div class="row">
+               <div class="col-md-6"><select class="form-control btn btn-primary dropdown-toggle" data-ng-model="selectedCategory" data-ng-options="x.type for x in weapons" data-ng-change="onCategoryChange()"></select></div>
+               <div class="col-md-6"><select class="form-control btn btn-primary dropdown-toggle" data-ng-model="selectedWeapon" data-ng-options="x.name for x in selectedCategory.weapons" data-ng-change="onWeaponChange()"></select></div>
+            </div>
+            <div class="weapon">
+                <div class="col-md-2 col-sm-2"><img src="assets/images/weapons/{{selectedWeapon.uname}}.png"></div>
+                <div class="col-md-5 col-sm-5 col-xs-12"><span ng-repeat="(key, value) in effectiveDamage"><b>{{key}}</b>: <span ng-class="{'highlight up' : effectiveDamage[key]>selectedWeapon.damageValues[key], 'highlight down' : effectiveDamage[key]<selectedWeapon.damageValues[key]}">{{value}}</span><br></span></div>
+                <div class="col-md-5 col-sm-5 col-xs-12"><b>Subweapon:</b> {{selectedWeapon.sub}}<br>
+                   <span ng-repeat="(key, value) in effectiveSubDamage" style="margin-left:10px; font-size: 9pt"><b>{{key}}</b>: <span ng-class="{'highlight up' : effectiveSubDamage[key]>subweapon.damageValues[key], 'highlight down' : effectiveSubDamage[key]<subweapon.damageValues[key]}">{{value}}</span><br></span>
+                   <b>Special:</b> {{selectedWeapon.special}}<br>
+                   <span  style="margin-left:10px; font-size: 9pt"><b>Duration:</b> {{effectiveSpecialDuration.toFixed(2)}}s
+                </div>
+            </div>
+            <div class="col-md-12 defcontainer">
+               <img class="icon small deficon" style="top: 0; left: 0; right: 0; bottom: 0; margin: auto" ng-repeat="i in getNumber(possibleEquipped[defSlider.value].mains) track by $index" src="assets/images/Ability_Defense_Up.png" />
+               <img class="icon tiny deficon" style="top: 0; left: 0; right: 0; bottom: 0; margin: auto"  ng-repeat="i in getNumber(possibleEquipped[defSlider.value].subs) track by $index" src="assets/images/Ability_Defense_Up.png" />
+            </div>
+            <div class="col-md-12" style="text-align: center">
+               <rzslider rz-slider-model="defSlider.value" rz-slider-options="defSlider.options"></rzslider>
+               Target Defense
+            </div>
+            <h2 class="page-header">Abilities
+               <button type="button" class="btn btn-default btn-lg" ng-click="clear()">RESET</button>
+            </h2>
+            <div class="row">
+               <div class="abilitylist">
+                  <div class="col-md-6 col-xs-12">
+                     <h2 >Mains:</h2>
+                     <a href="javascript:"><img class="icon" ng-repeat="main in mains track by $index" ng-src="{{main.icon}}" ng-class="imgtble" uib-tooltip="{{main.name}}" ng-click="demain(main)" /></a><br>
+                     <span ng-repeat="main in mains track by $index" ng-hide="{{main.stackable}}">{{main.name}} <span class="help" uib-tooltip="{{main.effects}}" >?</span><br></span>
+                     <p></p>
+                  </div>
+                  <div class="col-md-6 col-xs-12">
+                     <h2 >Subs:</h2>
+                     <a href="javascript:">
+                     <img class="icon small" ng-repeat="sub in subs track by $index" ng-src="{{sub.icon}}" ng-class="imgtble" uib-tooltip="{{sub.name}}" ng-click="desub(sub)"/>
+                     </a>
+                  </div>
+               </div>
+            </div>
+            <hr>
+            <ul class="col-xs-3" ng-repeat="ability in abilities" style="z-index: 90">
+               <a href="javascript:"><img class="icon" ng-src="{{::ability.icon}}" uib-tooltip="{{::ability.name}}" ng-click="activate(ability)" ng-class="{'inactive' : points >= 57 || ability.lockout}"></a>
+            </ul>
+         </div>
+         <div class="col-md-6">
+            <h2 class="page-header">Stats</h2>
+            <div class="col-md-6" ng-repeat="stat in stats">
+               <p>{{::stat.name}}</p>
+               <div class="progress">
+                  <div class="progress-bar" role="progressbar" aria-valuenow="{{stat.value}}" aria-valuemin="{{stat.min}}" aria-valuemax="{{::stat.max}}" style="width: {{stat.value/stat.max * 100}}%;">
+                     {{stat.value.toFixed(2)}}{{stat.type}}
+                  </div>
+               </div>
+            </div>
+            <h2 class="page-header">Possible Gear
+               <button type="button" class="btn btn-default btn-lg" ng-if="!showGear" ng-click="toggleGear()">Show</button>
+               <button type="button" class="btn btn-default btn-lg" ng-if="showGear" ng-click="toggleGear()">Hide</button>
+            </h2>
+            <div ng-if = "showGear">
+               <p>Common: 1/3.3 | Rare: 1/33 | Flat: 1/13</p>
+               <div class="table-responsive">
+                  <table class="table table-bordered">
+                     <thead>
+                        <tr>
+                           <th>
+                              <h4>Name</h4>
+                           </th>
+                           <th>
+                              <h4>Image</h4>
+                           </th>
+                           <th>
+                              <h4>Ability</h4>
+                           </th>
+                           <th>
+                              <h4>Comn</h4>
+                           </th>
+                           <th>
+                              <h4>Rare</h4>
+                           </th>
+                        </tr>
+                     </thead>
+                     <tbody ng-repeat="item in possibleGear">
+                        <tr>
+                           <td><a href="http://splatoonwiki.org/wiki/{{item.uname}}">{{item.name}}</a></td>
+                           <td><img class="icon" ng-src="assets/images/{{item.uname}}.png" ></td>
+                           <td ng-repeat="ability in abilities" ng-show="{{ability.name == item.ability}}"><img class="icon" ng-src="{{::ability.icon}}" title="{{::ability.name}}"></img></td>
+                           <td ng-style="{'background-color':'#77DD77'}"><img class="icon" ng-repeat="abil in abilities" ng-if="item[abil.name] == '1/3.3'" ng-src="{{::abil.icon}}" title="{{::abil.name}}"></img></td>
+                           <td ng-style="{'background-color':'#FF6961'}"><img class="icon" ng-repeat="abil in abilities" ng-if="item[abil.name] == '1/33'" ng-src="{{::abil.icon}}" title="{{::abil.name}}"></img></td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div style="position:fixed; bottom: 0; z-index:100; left: 50%; transform: translateX(-50%);" class="container">
+         <div uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'danger')" close="closeAlert($index)" dismiss-on-timeout=2000>{{alert.msg}}</div>
+      </div>
+      <footer class="footer">
+         <div class="container">
+            <p>Calculator for splatoon built with <a href="https://angularjs.org/">AngularJS</a> |
+               <a href="https://docs.google.com/spreadsheets/d/1mE97vf8FxdfvR6pt7tFvYXkYGSZGg4AsrTI_2veUlbs">Roll Information</a> |
+               <a href="http://wikiwiki.jp/splatoon2ch/?%A5%AE%A5%A2%A5%D1%A5%EF%A1%BC%B8%A1%BE%DA">Ability Information</a> |
+               <a href="http://splatoonwiki.org/wiki/">Inkipedia</a> |
+               <a href="https://github.com/DeviPotato/splatoon-calculator">GitHub</a>
+            </p>
+         </div>
+      </footer>
 </html>
