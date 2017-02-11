@@ -439,7 +439,7 @@ angular.module('splatoonApp').weapons = function ($scope) {
 				depletion : 'Medium',
 				speedPenalty : false,
 				special: 'Inkzooka',
-				sub : 'Splat Bomb',
+				sub : 'Burst Bomb',
 				damageValues : {
 					"Min. Splash" : 25,
 					"Max. Splash" : 125,
